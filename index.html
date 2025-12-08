@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Studio 5</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
   <style>
     /* Reset */
     * {
@@ -21,6 +22,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      background: #000;
     }
 
     .page-bg, .animation-wrapper {
@@ -33,9 +35,6 @@
 
     .page-bg {
       background: #000000;
-      background-blend-mode: screen;
-      background-size: cover;
-      filter: grayscale(100%);
       z-index: -1;
     }
 
@@ -172,45 +171,6 @@
       filter: drop-shadow(0 0 40px rgba(138, 43, 226, 0.6));
     }
 
-    .image {
-      mask: url(#myMask);
-    }
-
-    .rectangle {
-      animation: reveal 3s ease-in-out infinite;
-    }
-
-    @keyframes reveal {
-      0%, 100% {
-        fill: white;
-      }
-      50% {
-        fill: black;
-      }
-    }
-
-    /* Generate multiple rectangles with different delays */
-    .rectangle:nth-child(1) { animation-delay: 0s; }
-    .rectangle:nth-child(2) { animation-delay: 0.1s; }
-    .rectangle:nth-child(3) { animation-delay: 0.2s; }
-    .rectangle:nth-child(4) { animation-delay: 0.3s; }
-    .rectangle:nth-child(5) { animation-delay: 0.4s; }
-    .rectangle:nth-child(6) { animation-delay: 0.5s; }
-    .rectangle:nth-child(7) { animation-delay: 0.6s; }
-    .rectangle:nth-child(8) { animation-delay: 0.7s; }
-    .rectangle:nth-child(9) { animation-delay: 0.8s; }
-    .rectangle:nth-child(10) { animation-delay: 0.9s; }
-    .rectangle:nth-child(11) { animation-delay: 1s; }
-    .rectangle:nth-child(12) { animation-delay: 1.1s; }
-    .rectangle:nth-child(13) { animation-delay: 1.2s; }
-    .rectangle:nth-child(14) { animation-delay: 1.3s; }
-    .rectangle:nth-child(15) { animation-delay: 1.4s; }
-    .rectangle:nth-child(16) { animation-delay: 1.5s; }
-    .rectangle:nth-child(17) { animation-delay: 1.6s; }
-    .rectangle:nth-child(18) { animation-delay: 1.7s; }
-    .rectangle:nth-child(19) { animation-delay: 1.8s; }
-    .rectangle:nth-child(20) { animation-delay: 1.9s; }
-
     /* Responsive */
     @media (max-width: 768px) {
       .container {
@@ -238,33 +198,58 @@
   <div class="page-wrapper">
     <div class="container">
       <svg viewBox="0 0 100 100">
-        <defs>
-          <mask id="myMask">
-            <rect class="rectangle" x="0" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="5" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="10" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="15" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="20" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="25" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="30" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="35" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="40" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="45" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="50" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="55" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="60" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="65" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="70" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="75" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="80" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="85" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="90" y="0" width="5" height="100" fill="white" />
-            <rect class="rectangle" x="95" y="0" width="5" height="100" fill="white" />
-          </mask>
-        </defs>
-        <image class="image" x="0" y="0" width="100" height="100" href="Logo6 Trans 300.png" preserveAspectRatio="xMidYMid slice" />
+        <mask id="myMask">
+          <rect class="rectangle" x="0" y="0" width="100%" height="100%" fill="black" />
+        </mask>
+        <image class="image" x="0" y="0" width="100%" height="100%" href="Logo6 Trans 300.png" preserveAspectRatio="xMidYMid slice" />
       </svg>
     </div>
   </div>
+
+  <script>
+    const mask = document.getElementById("myMask");
+
+    // Create 100 vertical rectangles
+    for (let i = 0; i < 100; i++) {
+      if (i % 2 === 0) {
+        // Top rectangles
+        const rectTop = `<rect class="rectanglesTop" x="${i}" y="-45" width="1%" height="45%" fill="white"/>`;
+        mask.innerHTML += rectTop;
+      } else {
+        // Bottom rectangles
+        const rectBottom = `<rect class="rectanglesBottom" x="${i}" y="100" width="1%" height="45%" fill="white"/>`;
+        mask.innerHTML += rectBottom;
+      }
+    }
+
+    const image = document.querySelector(".image");
+    image.setAttribute("mask", "url(#myMask)");
+
+    // Animate top rectangles
+    gsap.from(".rectanglesTop", {
+      yPercent: 600,
+      ease: "expo.easeInOut",
+      duration: 6,
+      yoyo: true,
+      repeat: -1,
+      stagger: {
+        amount: 0.3,
+        from: "random"
+      }
+    });
+
+    // Animate bottom rectangles
+    gsap.from(".rectanglesBottom", {
+      yPercent: -600,
+      ease: "expo.easeInOut",
+      duration: 6,
+      yoyo: true,
+      repeat: -1,
+      stagger: {
+        amount: 0.3,
+        from: "random"
+      }
+    });
+  </script>
 </body>
 </html>
