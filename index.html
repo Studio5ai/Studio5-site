@@ -1,50 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio Five – Private AI Supercomputers</title>
-  <style>
-    body{margin:0;font-family:-apple-system,system-ui,sans-serif;background:#000;color:#fff;line-height:1.6;text-align:center}
-    section{max-width:1000px;margin:0 auto;padding:100px 20px}
-    .logo{max-width:420px;margin:0 auto 3rem;display:block;filter:drop-shadow(0 0 30px rgba(0,102,255,0.5));transition:all .4s}
-    .logo:hover{filter:drop-shadow(0 0 50px rgba(0,102,255,0.9));transform:scale(1.04)}
-    h1{font-size:5rem;font-weight:900;margin:0 0 1rem}
-    h2{font-size:2.3rem;margin:3rem 0 1rem}
-    p{font-size:1.5rem;opacity:0.92}
-    .core{background:#111;padding:4.5rem;border-radius:20px;margin:5rem 0}
-    .future{opacity:0.78;font-size:1.25rem;margin:6rem 0 4rem}
-    .btn{background:#0066ff;color:#fff;padding:1.3rem 3.2rem;font-size:1.5rem;border-radius:12px;text-decoration:none;display:inline-block;margin:2rem}
-    .tweet{margin-top:2rem;font-size:0.95rem;opacity:0.7}
-    footer{margin-top:10rem;opacity:0.4;font-size:0.9rem}
-  </style>
-</head>
-<body>
-  <section>
-   <img src="/Logo6 Trans 300.png" alt="Studio Five" class="logo">
-    <h1>Studio Five</h1>
-    <p>Private AI Supercomputers<br>Built for those who cannot use the public cloud.</p>
+/* Config */
+$color-bg: #000000;
+$color-particle: #fff;
+$spacing: 2560px;
+$time-1: 120s;
+$time-2: 220s;
+$time-3: 280s;
+$time-4: 320s;
 
-    <div class="core">
-      <h2>The Core System – Available Today</h2>
-      <p>5-node sovereign cluster · 1 trillion+ parameters offline<br>
-         520–680 tokens per second · 8–12 concurrent users</p>
-      <p>One-time ownership · $2.9 M – $3.9 M</p>
-    </div>
+/* mixins */
+@function particles($max) {
+  $val: 0px 0px $color-particle;
+  @for $i from 1 through $max {
+    $val: #{$val}, random($spacing)+px random($spacing)+px $color-particle;
+  }
+  @return $val;
+}
 
-    <div class="future">
-      <strong>Titan</strong> – 25-node ring · 2,600–3,300 tokens/sec · 40–55 users<br>
-      <strong>Desktop Frankenstein</strong> – Single-node add-on · 70–120 tokens/sec · $18–22k
-    </div>
+@mixin particles($max) {
+  box-shadow: particles($max);
+  border-radius: 50%;
+}
 
-    <a href="mailto:contact@studiofive.ai" class="btn">Request Private Demo</a>
-    <div class="tweet">
-      <a href="https://twitter.com/intent/tweet?text=Just%20discovered%20Studio%20Five%20–%20private%201T%2B%20AI%20at%20600%2B%20tokens/s%20offline.%20studiofive.ai" target="_blank">
-        Share on X →
-      </a>
-    </div>
+/* Styles */
+html, body {
+  height: 100%;
+}
 
-    <footer>Studio Five · Nashville · 2025</footer>
-  </section>
-</body>
-</html>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  overflow: hidden;
+}
+
+.page-bg, .animation-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.page-bg {
+  background: $color-bg;
+  background-blend-mode: screen;
+  background-size: cover;
+  filter: grayscale(100%);
+  z-index: -1;
+}
+
+.particle, .particle:after {
+  background: transparent;
+}
+
+.particle:after {
+  position: absolute;
+  content: "";
+  top: $spacing;
+}
+
+.particle-1 {
+  animation: animParticle $time-1 linear infinite;
+  @include particles(1000);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-1:after {
+  @include particles(900);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-2 {
+  animation: animParticle $time-2 linear infinite;
+  @include particles(800);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-2:after {
+  @include particles(500);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-3:after {
+  @include particles(1100);
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+}
+
+.particle-4 {
+  animation: animParticle $time-4 linear infinite;
+  @include particles(1200);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-4:after {
+  @include particles(700);
+  height: 1px;
+  width: 1px;
+}
+
+@keyframes animParticle {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY($spacing * -1);
+  }
+}
+
+.page-wrapper {
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+}
+
+h4 {
+  color: #fff;
+  font-family: Monoton;
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 1.5s ease-in-out infinite alternate;
+}
+
+h4:hover {
+  color: #FF1177;
+  -webkit-animation: none;
+  -moz-animation: none;
+  animation: none;
+}
+
+/*glow for webkit*/
+
+@-webkit-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #FF1177,
+      0 0 70px #FF1177,
+      0 0 80px #FF1177,
+      0 0 100px #FF1177,
+      0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #FF1177,
+      0 0 35px #FF1177,
+      0 0 40px #FF1177,
+      0 0 50px #FF1177,
+      0 0 75px #FF1177;
+  }
+}
+
+/*glow for mozilla*/
+
+@-moz-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #FF1177,
+      0 0 70px #FF1177,
+      0 0 80px #FF1177,
+      0 0 100px #FF1177,
+      0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #FF1177,
+      0 0 35px #FF1177,
+      0 0 40px #FF1177,
+      0 0 50px #FF1177,
+      0 0 75px #FF1177;
+  }
+}
+
+/*glow*/
+
+@keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #FF1177,
+      0 0 70px #FF1177,
+      0 0 80px #FF1177,
+      0 0 100px #FF1177,
+      0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #FF1177,
+      0 0 35px #FF1177,
+      0 0 40px #FF1177,
+      0 0 50px #FF1177,
+      0 0 75px #FF1177;
+  }
+}
