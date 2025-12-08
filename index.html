@@ -1,226 +1,211 @@
-<div class="page-bg"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starfield</title>
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<div class="animation-wrapper">
-  <div class="particle particle-1"></div>
-  <div class="particle particle-2"></div>
-  <div class="particle particle-3"></div>
-  <div class="particle particle-4"></div>
-</div>
+    html, body {
+      height: 100%;
+    }
 
-<div class="page-wrapper"> 
-  <h4></h4>
-</div>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+      overflow: hidden;
+    }
 
+    .page-bg, .animation-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
 
-/* Config */
-$color-bg: #000000;
-$color-particle: #fff;
-$spacing: 2560px;
-$time-1: 120s;
-$time-2: 220s;
-$time-3: 280s;
-$time-4: 320s;
+    .page-bg {
+      background: #000000;
+      background-blend-mode: screen;
+      background-size: cover;
+      filter: grayscale(100%);
+      z-index: -1;
+    }
 
-/* mixins */
-@function particles($max) {
-  $val: 0px 0px $color-particle;
-  @for $i from 1 through $max {
-    $val: #{$val}, random($spacing)+px random($spacing)+px $color-particle;
-  }
-  @return $val;
-}
+    .particle, .particle:after {
+      background: transparent;
+    }
 
-@mixin particles($max) {
-  box-shadow: particles($max);
-  border-radius: 50%;
-}
+    .particle:after {
+      position: absolute;
+      content: "";
+      top: 2560px;
+    }
 
-/* Styles */
-html, body {
-  height: 100%;
-}
+    /* Particle 1 */
+    .particle-1 {
+      animation: animParticle 120s linear infinite;
+      box-shadow: 
+        1247px 391px #fff, 834px 1829px #fff, 2145px 672px #fff, 456px 2301px #fff,
+        1678px 1092px #fff, 923px 567px #fff, 2389px 1456px #fff, 234px 1789px #fff,
+        1523px 234px #fff, 2012px 1890px #fff, 678px 1345px #fff, 1890px 890px #fff,
+        345px 2134px #fff, 1456px 1567px #fff, 2234px 345px #fff, 789px 987px #fff,
+        1901px 1234px #fff, 567px 1876px #fff, 2456px 678px #fff, 1123px 2345px #fff;
+      border-radius: 50%;
+      height: 2px;
+      width: 2px;
+    }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4rem;
-  overflow: hidden;
-}
+    .particle-1:after {
+      box-shadow: 
+        987px 1543px #fff, 1765px 876px #fff, 2301px 1987px #fff, 543px 1234px #fff,
+        1432px 765px #fff, 876px 2123px #fff, 2167px 432px #fff, 321px 1654px #fff,
+        1654px 987px #fff, 2023px 1321px #fff, 765px 543px #fff, 1987px 2234px #fff,
+        432px 876px #fff, 1321px 1765px #fff, 2432px 1098px #fff, 654px 321px #fff;
+      border-radius: 50%;
+      height: 2px;
+      width: 2px;
+    }
 
-.page-bg, .animation-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+    /* Particle 2 */
+    .particle-2 {
+      animation: animParticle 220s linear infinite;
+      box-shadow: 
+        2134px 987px #fff, 876px 1654px #fff, 1543px 432px #fff, 2301px 1876px #fff,
+        765px 2234px #fff, 1987px 765px #fff, 432px 1432px #fff, 1765px 2023px #fff,
+        2432px 1234px #fff, 543px 876px #fff, 1876px 1543px #fff, 987px 321px #fff,
+        1234px 1987px #fff, 2023px 654px #fff, 321px 1765px #fff, 1654px 2301px #fff;
+      border-radius: 50%;
+      height: 2px;
+      width: 2px;
+    }
 
-.page-bg {
-  background: $color-bg;
-  background-blend-mode: screen;
-  background-size: cover;
-  filter: grayscale(100%);
-  z-index: -1;
-}
+    .particle-2:after {
+      box-shadow: 
+        1432px 1234px #fff, 2234px 876px #fff, 765px 1987px #fff, 1876px 432px #fff,
+        543px 1654px #fff, 2023px 2301px #fff, 987px 765px #fff, 1765px 1432px #fff;
+      border-radius: 50%;
+      height: 3px;
+      width: 3px;
+    }
 
-.particle, .particle:after {
-  background: transparent;
-}
+    /* Particle 3 */
+    .particle-3 {
+      animation: animParticle 280s linear infinite;
+      box-shadow: 
+        1654px 2134px #fff, 2301px 765px #fff, 876px 1432px #fff, 1987px 1876px #fff,
+        432px 987px #fff, 2023px 1234px #fff, 1234px 543px #fff, 765px 2301px #fff,
+        1876px 654px #fff, 2432px 1765px #fff, 543px 1987px #fff, 1543px 321px #fff,
+        987px 1654px #fff, 2234px 2023px #fff, 321px 876px #fff, 1765px 1098px #fff;
+      border-radius: 50%;
+      height: 2px;
+      width: 2px;
+    }
 
-.particle:after {
-  position: absolute;
-  content: "";
-  top: $spacing;
-}
+    .particle-3:after {
+      box-shadow: 
+        2023px 1543px #fff, 876px 2234px #fff, 1432px 765px #fff, 2301px 1987px #fff,
+        654px 1234px #fff, 1876px 432px #fff, 987px 1765px #fff, 2134px 876px #fff,
+        432px 2023px #fff, 1765px 543px #fff, 2432px 1432px #fff;
+      height: 3px;
+      width: 3px;
+      border-radius: 50%;
+    }
 
-.particle-1 {
-  animation: animParticle $time-1 linear infinite;
-  @include particles(1000);
-  height: 2px;
-  width: 2px;
-}
+    /* Particle 4 */
+    .particle-4 {
+      animation: animParticle 320s linear infinite;
+      box-shadow: 
+        1876px 1987px #fff, 2234px 543px #fff, 765px 1765px #fff, 1432px 876px #fff,
+        2023px 2301px #fff, 543px 654px #fff, 1765px 1432px #fff, 987px 2134px #fff,
+        2301px 765px #fff, 432px 1876px #fff, 1654px 987px #fff, 2432px 1543px #fff,
+        876px 321px #fff, 1234px 2023px #fff, 2134px 1234px #fff, 321px 1654px #fff,
+        1987px 432px #fff, 654px 2234px #fff, 2023px 876px #fff, 1543px 1765px #fff;
+      border-radius: 50%;
+      height: 1px;
+      width: 1px;
+    }
 
-.particle-1:after {
-  @include particles(900);
-  height: 2px;
-  width: 2px;
-}
+    .particle-4:after {
+      box-shadow: 
+        2301px 1432px #fff, 876px 987px #fff, 1654px 2023px #fff, 432px 1765px #fff,
+        1987px 654px #fff, 2134px 1876px #fff, 765px 543px #fff, 1432px 2301px #fff;
+      border-radius: 50%;
+      height: 1px;
+      width: 1px;
+    }
 
-.particle-2 {
-  animation: animParticle $time-2 linear infinite;
-  @include particles(800);
-  height: 2px;
-  width: 2px;
-}
+    @keyframes animParticle {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(-2560px);
+      }
+    }
 
-.particle-2:after {
-  @include particles(500);
-  height: 3px;
-  width: 3px;
-}
+    .page-wrapper {
+      text-align: center;
+      color: #fff;
+      z-index: 2;
+    }
 
-.particle-3:after {
-  @include particles(1100);
-  height: 3px;
-  width: 3px;
-  border-radius: 50%;
-}
+    h4 {
+      color: #fff;
+      font-family: Monoton, cursive;
+      animation: neon1 1.5s ease-in-out infinite alternate;
+    }
 
-.particle-4 {
-  animation: animParticle $time-4 linear infinite;
-  @include particles(1200);
-  height: 1px;
-  width: 1px;
-}
+    h4:hover {
+      color: #FF1177;
+      animation: none;
+    }
 
-.particle-4:after {
-  @include particles(700);
-  height: 1px;
-  width: 1px;
-}
-
-@keyframes animParticle {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY($spacing * -1);
-  }
-}
-
-.page-wrapper {
-  text-align: center;
-  color: #fff;
-  z-index: 2;
-}
-
-h4 {
-  color: #fff;
-  font-family: Monoton;
-  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
-  animation: neon1 1.5s ease-in-out infinite alternate;
-}
-
-h4:hover {
-  color: #FF1177;
-  -webkit-animation: none;
-  -moz-animation: none;
-  animation: none;
-}
-
-/*glow for webkit*/
-
-@-webkit-keyframes neon1 {
-  from {
-    text-shadow: 0 0 10px #fff,
-      0 0 20px #fff,
-      0 0 30px #fff,
-      0 0 40px #FF1177,
-      0 0 70px #FF1177,
-      0 0 80px #FF1177,
-      0 0 100px #FF1177,
-      0 0 150px #FF1177;
-  }
-  to {
-    text-shadow: 0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px #fff,
-      0 0 20px #FF1177,
-      0 0 35px #FF1177,
-      0 0 40px #FF1177,
-      0 0 50px #FF1177,
-      0 0 75px #FF1177;
-  }
-}
-
-/*glow for mozilla*/
-
-@-moz-keyframes neon1 {
-  from {
-    text-shadow: 0 0 10px #fff,
-      0 0 20px #fff,
-      0 0 30px #fff,
-      0 0 40px #FF1177,
-      0 0 70px #FF1177,
-      0 0 80px #FF1177,
-      0 0 100px #FF1177,
-      0 0 150px #FF1177;
-  }
-  to {
-    text-shadow: 0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px #fff,
-      0 0 20px #FF1177,
-      0 0 35px #FF1177,
-      0 0 40px #FF1177,
-      0 0 50px #FF1177,
-      0 0 75px #FF1177;
-  }
-}
-
-/*glow*/
-
-@keyframes neon1 {
-  from {
-    text-shadow: 0 0 10px #fff,
-      0 0 20px #fff,
-      0 0 30px #fff,
-      0 0 40px #FF1177,
-      0 0 70px #FF1177,
-      0 0 80px #FF1177,
-      0 0 100px #FF1177,
-      0 0 150px #FF1177;
-  }
-  to {
-    text-shadow: 0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px #fff,
-      0 0 20px #FF1177,
-      0 0 35px #FF1177,
-      0 0 40px #FF1177,
-      0 0 50px #FF1177,
-      0 0 75px #FF1177;
-  }
-}
+    @keyframes neon1 {
+      from {
+        text-shadow: 
+          0 0 10px #fff,
+          0 0 20px #fff,
+          0 0 30px #fff,
+          0 0 40px #FF1177,
+          0 0 70px #FF1177,
+          0 0 80px #FF1177,
+          0 0 100px #FF1177,
+          0 0 150px #FF1177;
+      }
+      to {
+        text-shadow: 
+          0 0 5px #fff,
+          0 0 10px #fff,
+          0 0 15px #fff,
+          0 0 20px #FF1177,
+          0 0 35px #FF1177,
+          0 0 40px #FF1177,
+          0 0 50px #FF1177,
+          0 0 75px #FF1177;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg"></div>
+  <div class="animation-wrapper">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+  </div>
+  <div class="page-wrapper"> 
+    <h4>STARFIELD</h4>
+  </div>
+</body>
+</html>
