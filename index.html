@@ -1,255 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio 5</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+$starFieldWidth: 2560
+$starFieldHeight: 2560
+$starStartOffset: 600px
 
-    html, body {
-      height: 100%;
-    }
+$starOneScrollDuration: 550s
+$starTwoScrollDuration: 350s
+$starThreeScrollDuration: 250s
+$numStarOneStars: 1000
+$numStarTwoStars: 300
+$numStarThreeStars: 50
+$numShootingStars: 0
+$width: 100%
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background: #000;
-    }
+html
+  height: 100%
+  body
+    width: 100%
+    height: 100%
+    margin: 0
+.container
+  display: block
+  position: relative
+  width: 100%
+  height: 100%
+  background: linear-gradient(to bottom, #000000 0%, #000000 100%)
+  .text
+    color: #FFF
+    position: absolute
+    top: 50%
+    right: 50%
+    margin: -10px -75px 0 0
+    font-size: 20px
+    font-family: sans-serif
+    font-weight: bold
+  
+@function create-stars($n)
 
-    .page-bg, .animation-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+  $stars: "#{random($starFieldWidth)}px #{random($starFieldHeight)}px #FFF"
 
-    .page-bg {
-      background: #000000;
-      z-index: -1;
-    }
+  @for $i from 2 through $n
+    $stars: "#{$stars} , #{random($starFieldWidth)}px #{random($starFieldHeight)}px #FFF"
 
-    .particle, .particle:after {
-      background: transparent;
-    }
+  @return unquote($stars)
 
-    .particle:after {
-      position: absolute;
-      content: "";
-      top: 4000px;
-    }
+@mixin star-template($numStars, $starSize, $scrollSpeed)
+  z-index: 10
+  width: $starSize
+  height: $starSize
+  border-radius: 50%
+  background: transparent
+  box-shadow: create-stars($numStars)
+  animation: animStar $scrollSpeed linear infinite
+  &:after
+    content: " "
+    top: -$starStartOffset
+    width: $starSize 
+    height: $starSize
+    border-radius: 50%
+    position: absolute
+    backgroud: transparent
+    box-shadow: create-stars($numStars)
+    
+  
+@mixin shooting-star-template($numStars, $starSize, $speed)
+  z-index: 10
+  width: $starSize
+  height: $starSize + 80px
+  border-top-left-radius: 50%
+  border-top-right-radius: 50%
+  position: absolute
+  bottom: 0
+  right: 0
+  background: linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,1))
+  animation: animShootingStar $speed linear infinite
+  
+.stars
+  @include star-template($numStarOneStars, 1px, $starOneScrollDuration)
+.stars1
+  @include star-template($numStarTwoStars, 2px, $starTwoScrollDuration)
+.stars2
+  @include star-template($numStarThreeStars, 3px, $starThreeScrollDuration)
+.shooting-stars
+  @include shooting-star-template($numShootingStars, 5px, 0s)
+    
+@keyframes animStar
+  from
+    transform: translateY(0px)
+  to
+    transform: translateY(-#{$starFieldHeight}px) translateX(-#{$starFieldWidth}px)
+    
 
-    /* Particle 1 */
-    .particle-1 {
-      animation: animParticle 100s linear infinite;
-      box-shadow: 
-        1247px 391px #fff, 834px 1829px #fff, 2145px 672px #fff, 456px 2301px #fff,
-        1678px 1092px #fff, 923px 567px #fff, 2389px 1456px #fff, 234px 1789px #fff,
-        1523px 234px #fff, 2012px 1890px #fff, 678px 1345px #fff, 1890px 890px #fff,
-        345px 2134px #fff, 1456px 1567px #fff, 2234px 345px #fff, 789px 987px #fff,
-        1901px 1234px #fff, 567px 1876px #fff, 2456px 678px #fff, 1123px 2345px #fff;
-      border-radius: 50%;
-      height: 2px;
-      width: 2px;
-    }
-
-    .particle-1:after {
-      box-shadow: 
-        987px 1543px #fff, 1765px 876px #fff, 2301px 1987px #fff, 543px 1234px #fff,
-        1432px 765px #fff, 876px 2123px #fff, 2167px 432px #fff, 321px 1654px #fff,
-        1654px 987px #fff, 2023px 1321px #fff, 765px 543px #fff, 1987px 2234px #fff,
-        432px 876px #fff, 1321px 1765px #fff, 2432px 1098px #fff, 654px 321px #fff;
-      border-radius: 50%;
-      height: 2px;
-      width: 2px;
-    }
-
-    /* Particle 2 */
-    .particle-2 {
-      animation: animParticle 200s linear infinite;
-      box-shadow: 
-        2134px 987px #fff, 876px 1654px #fff, 1543px 432px #fff, 2301px 1876px #fff,
-        765px 2234px #fff, 1987px 765px #fff, 432px 1432px #fff, 1765px 2023px #fff,
-        2432px 1234px #fff, 543px 876px #fff, 1876px 1543px #fff, 987px 321px #fff,
-        1234px 1987px #fff, 2023px 654px #fff, 321px 1765px #fff, 1654px 2301px #fff;
-      border-radius: 50%;
-      height: 2px;
-      width: 2px;
-    }
-
-    .particle-2:after {
-      box-shadow: 
-        1432px 1234px #fff, 2234px 876px #fff, 765px 1987px #fff, 1876px 432px #fff,
-        543px 1654px #fff, 2023px 2301px #fff, 987px 765px #fff, 1765px 1432px #fff;
-      border-radius: 50%;
-      height: 3px;
-      width: 3px;
-    }
-
-    /* Particle 3 */
-    .particle-3 {
-      animation: animParticle 240s linear infinite;
-      box-shadow: 
-        1654px 2134px #fff, 2301px 765px #fff, 876px 1432px #fff, 1987px 1876px #fff,
-        432px 987px #fff, 2023px 1234px #fff, 1234px 543px #fff, 765px 2301px #fff,
-        1876px 654px #fff, 2432px 1765px #fff, 543px 1987px #fff, 1543px 321px #fff,
-        987px 1654px #fff, 2234px 2023px #fff, 321px 876px #fff, 1765px 1098px #fff;
-      border-radius: 50%;
-      height: 2px;
-      width: 2px;
-    }
-
-    .particle-3:after {
-      box-shadow: 
-        2023px 1543px #fff, 876px 2234px #fff, 1432px 765px #fff, 2301px 1987px #fff,
-        654px 1234px #fff, 1876px 432px #fff, 987px 1765px #fff, 2134px 876px #fff,
-        432px 2023px #fff, 1765px 543px #fff, 2432px 1432px #fff;
-      height: 3px;
-      width: 3px;
-      border-radius: 50%;
-    }
-
-    /* Particle 4 */
-    .particle-4 {
-      animation: animParticle 80s linear infinite;
-      box-shadow: 
-        1876px 1987px #fff, 2234px 543px #fff, 765px 1765px #fff, 1432px 876px #fff,
-        2023px 2301px #fff, 543px 654px #fff, 1765px 1432px #fff, 987px 2134px #fff,
-        2301px 765px #fff, 432px 1876px #fff, 1654px 987px #fff, 2432px 1543px #fff,
-        876px 321px #fff, 1234px 2023px #fff, 2134px 1234px #fff, 321px 1654px #fff,
-        1987px 432px #fff, 654px 2234px #fff, 2023px 876px #fff, 1543px 1765px #fff;
-      border-radius: 50%;
-      height: 1px;
-      width: 1px;
-    }
-
-    .particle-4:after {
-      box-shadow: 
-        2301px 1432px #fff, 876px 987px #fff, 1654px 2023px #fff, 432px 1765px #fff,
-        1987px 654px #fff, 2134px 1876px #fff, 765px 543px #fff, 1432px 2301px #fff;
-      border-radius: 50%;
-      height: 1px;
-      width: 1px;
-    }
-
-    @keyframes animParticle {
-      from {
-        transform: translateY(0px);
-      }
-      to {
-        transform: translateY(-2560px);
-      }
-    }
-
-    .page-wrapper {
-      position: relative;
-      text-align: center;
-      z-index: 2;
-    }
-
-    /* SVG Container */
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 600px;
-      height: 600px;
-    }
-
-    svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 0 40px rgba(138, 43, 226, 0.6));
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        width: 400px;
-        height: 400px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        width: 300px;
-        height: 300px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="page-bg"></div>
-  <div class="animation-wrapper">
-    <div class="particle particle-1"></div>
-    <div class="particle particle-2"></div>
-    <div class="particle particle-3"></div>
-    <div class="particle particle-4"></div>
-  </div>
-  <div class="page-wrapper">
-    <div class="container">
-      <svg viewBox="0 0 100 100">
-        <mask id="myMask">
-          <rect class="rectangle" x="0" y="0" width="100%" height="100%" fill="black" />
-        </mask>
-        <image class="image" x="0" y="0" width="100%" height="100%" href="Logo6 Trans 300.png" preserveAspectRatio="xMidYMid slice" />
-      </svg>
-    </div>
-  </div>
-
-  <script>
-    const mask = document.getElementById("myMask");
-
-    // Create 100 vertical rectangles
-    for (let i = 0; i < 100; i++) {
-      if (i % 2 === 0) {
-        // Top rectangles
-        const rectTop = `<rect class="rectanglesTop" x="${i}" y="-45" width="1%" height="45%" fill="white"/>`;
-        mask.innerHTML += rectTop;
-      } else {
-        // Bottom rectangles
-        const rectBottom = `<rect class="rectanglesBottom" x="${i}" y="100" width="1%" height="45%" fill="white"/>`;
-        mask.innerHTML += rectBottom;
-      }
-    }
-
-    const image = document.querySelector(".image");
-    image.setAttribute("mask", "url(#myMask)");
-
-    // Animate top rectangles
-    gsap.from(".rectanglesTop", {
-      yPercent: 600,
-      ease: "expo.easeInOut",
-      duration: 6,
-      yoyo: true,
-      repeat: -1,
-      stagger: {
-        amount: 0.3,
-        from: "random"
-      }
-    });
-
-    // Animate bottom rectangles
-    gsap.from(".rectanglesBottom", {
-      yPercent: -600,
-      ease: "expo.easeInOut",
-      duration: 6,
-      yoyo: true,
-      repeat: -1,
-      stagger: {
-        amount: 0.3,
-        from: "random"
-      }
-    });
-  </script>
-</body>
-</html>
+@keyframes animShootingStar
+  from
+    transform: translateY(0px) translateX(0px) rotate(-45deg)
+    opacity: 1
+    height: 5px
+  to
+    transform: translateY(-#{$starFieldHeight}px) translateX(-#{$starFieldWidth}px) rotate(-45deg)
+    opacity: 1
+    height: 800px
+  
+    
