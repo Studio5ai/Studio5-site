@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio 5</title>
+  <title>Cool CSS/JS Effect</title>
   <style>
     * {
       margin: 0;
@@ -16,39 +16,29 @@
       height: 100%;
     }
 
-    .container {
-      display: block;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, #000000 0%, #000000 100%);
+    body {
+      background: #000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-    }
-
-    .text {
-      color: #FFF;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 20px;
-      font-family: sans-serif;
-      font-weight: bold;
-      text-align: center;
     }
 
     /* Star layers */
     .stars, .stars1, .stars2 {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
+      pointer-events: none;
     }
 
-    /* Small stars - 2px, slow - 2000 stars */
+    /* Small stars - 2px, slow */
     .stars {
-      z-index: 10;
+      z-index: 1;
       width: 2px;
       height: 2px;
       border-radius: 50%;
@@ -95,9 +85,9 @@
         432px 876px #FFF, 1321px 1765px #FFF, 2432px 1098px #FFF, 654px 321px #FFF;
     }
 
-    /* Medium stars - 2px, medium speed - 800 stars */
+    /* Medium stars - 3px, medium speed */
     .stars1 {
-      z-index: 10;
+      z-index: 1;
       width: 3px;
       height: 3px;
       border-radius: 50%;
@@ -131,9 +121,9 @@
         1432px 1234px #FFF, 2234px 876px #FFF, 765px 1987px #FFF, 1876px 432px #FFF;
     }
 
-    /* Large stars - 3px, fast - 300 stars */
+    /* Large stars - 4px, fast */
     .stars2 {
-      z-index: 10;
+      z-index: 1;
       width: 4px;
       height: 4px;
       border-radius: 50%;
@@ -173,14 +163,548 @@
         transform: translateY(-2560px) translateX(-2560px);
       }
     }
+
+    #container {
+      position: relative;
+      z-index: 10;
+      width: 70%;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .line {
+      position: relative;
+      font-size: 80px;
+      text-align: center;
+      font-family: sans-serif;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    @media screen and (max-width: 510px) {
+      .line {
+        font-size: 50px;
+      }
+    }
+
+    @media screen and (max-width: 360px) {
+      .line {
+        font-size: 35px;
+      }
+    }
+    
+    /* Toggle buttons */
+    .color-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      display: flex;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+    
+    .animation-toggle {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+    
+    .toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .anim-btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-family: sans-serif;
+      font-size: 12px;
+      text-align: left;
+    }
+    
+    .toggle-btn.active,
+    .anim-btn.active {
+      border-color: white;
+      box-shadow: 0 0 12px currentColor;
+    }
+    
+    .anim-btn.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .speed-toggle {
+      position: fixed;
+      top: 280px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+    
+    .speed-label {
+      color: rgba(255, 255, 255, 0.5);
+      font-family: sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0 4px;
+    }
+    
+    .loop-toggle {
+      position: fixed;
+      top: 435px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+    
+    .toggle-btn-rainbow {
+      background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff);
+      color: #ffff00;
+    }
+    
+    .toggle-btn-white {
+      background: linear-gradient(135deg, #ffffff, #cccccc);
+      color: #ffffff;
+    }
+    
+    .toggle-btn-orange {
+      background: linear-gradient(135deg, #f0a54f, #dd8448);
+      color: #f0a54f;
+    }
+    
+    .toggle-btn-green {
+      background: linear-gradient(135deg, #00ff88, #00cc6a);
+      color: #00ff88;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="stars"></div>
-    <div class="stars1"></div>
-    <div class="stars2"></div>
-    <div class="text">Studio 5</div>
+  <!-- Starfield background -->
+  <div class="stars"></div>
+  <div class="stars1"></div>
+  <div class="stars2"></div>
+
+  <!-- Controls -->
+  <div class="color-toggle">
+    <button class="toggle-btn toggle-btn-rainbow active" onclick="setTheme('rainbow')" title="Rainbow"></button>
+    <button class="toggle-btn toggle-btn-white" onclick="setTheme('white')" title="White"></button>
+    <button class="toggle-btn toggle-btn-orange" onclick="setTheme('orange')" title="Orange"></button>
+    <button class="toggle-btn toggle-btn-green" onclick="setTheme('green')" title="Green"></button>
   </div>
+  
+  <div class="animation-toggle">
+    <button class="anim-btn active" onclick="setAnimation('sweep')" id="anim-sweep">Sweep</button>
+    <button class="anim-btn" onclick="setAnimation('pulse')" id="anim-pulse">Pulse</button>
+    <button class="anim-btn" onclick="setAnimation('wave')" id="anim-wave">Wave</button>
+    <button class="anim-btn" onclick="setAnimation('cascade')" id="anim-cascade">Cascade</button>
+    <button class="anim-btn" onclick="setAnimation('breathe')" id="anim-breathe">Breathe</button>
+  </div>
+  
+  <div class="speed-toggle">
+    <span class="speed-label">Speed</span>
+    <button class="anim-btn" onclick="setSpeed(0.5)" id="speed-slow">Slow</button>
+    <button class="anim-btn active" onclick="setSpeed(1)" id="speed-normal">Normal</button>
+    <button class="anim-btn" onclick="setSpeed(1.5)" id="speed-fast">Fast</button>
+    <button class="anim-btn" onclick="setSpeed(2.5)" id="speed-faster">Faster</button>
+  </div>
+  
+  <div class="loop-toggle">
+    <span class="speed-label">Loop</span>
+    <button class="anim-btn active" onclick="setLoop(true)" id="loop-on">Loop</button>
+    <button class="anim-btn" onclick="setLoop(false)" id="loop-off">Once</button>
+    <button class="anim-btn" onclick="resetAnimation()" id="loop-reset">Reset</button>
+  </div>
+
+  <div id="container">
+    <h1 class="line" id="line1">Your AI.</h1>
+    <h1 class="line" id="line2">Your Building.</h1>
+    <h1 class="line" id="line3">No one else's rules.</h1>
+  </div>
+
+  <script>
+    var line1 = document.getElementById('line1');
+    var line2 = document.getElementById('line2');
+    var line3 = document.getElementById('line3');
+    
+    // Each line has its own position tracker
+    var positions = { line1: -20, line2: -20, line3: -20 };
+    var directions = { line1: true, line2: true, line3: true };
+    var started = { line1: true, line2: false, line3: false };
+    
+    // Current theme and animation
+    var currentTheme = 'rainbow';
+    var currentAnimation = 'sweep';
+    var currentSpeed = 1;
+    var loopEnabled = true;
+    var completed = { line1: false, line2: false, line3: false };
+    var time = 0;
+    
+    // Start line 2 after 1.5 seconds
+    setTimeout(() => { started.line2 = true; }, 1500);
+    
+    // Start line 3 after 3.25 seconds (1.5 + 1.75)
+    setTimeout(() => { started.line3 = true; }, 3250);
+    
+    function setTheme(theme) {
+      currentTheme = theme;
+      document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector('.toggle-btn-' + theme).classList.add('active');
+    }
+    
+    function setAnimation(anim) {
+      currentAnimation = anim;
+      document.querySelectorAll('.animation-toggle .anim-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('anim-' + anim).classList.add('active');
+      // Reset positions for new animation
+      positions = { line1: -20, line2: -20, line3: -20 };
+      directions = { line1: true, line2: true, line3: true };
+    }
+    
+    function setSpeed(speed) {
+      currentSpeed = speed;
+      document.querySelectorAll('.speed-toggle .anim-btn').forEach(btn => btn.classList.remove('active'));
+      if (speed === 0.5) document.getElementById('speed-slow').classList.add('active');
+      else if (speed === 1) document.getElementById('speed-normal').classList.add('active');
+      else if (speed === 1.5) document.getElementById('speed-fast').classList.add('active');
+      else if (speed === 2.5) document.getElementById('speed-faster').classList.add('active');
+    }
+    
+    function setLoop(enabled) {
+      loopEnabled = enabled;
+      document.querySelectorAll('.loop-toggle .anim-btn').forEach(btn => btn.classList.remove('active'));
+      if (enabled) document.getElementById('loop-on').classList.add('active');
+      else document.getElementById('loop-off').classList.add('active');
+      // Reset completed status when changing loop mode
+      completed = { line1: false, line2: false, line3: false };
+    }
+    
+    function resetAnimation() {
+      positions = { line1: -20, line2: -20, line3: -20 };
+      directions = { line1: true, line2: true, line3: true };
+      completed = { line1: false, line2: false, line3: false };
+      started = { line1: true, line2: false, line3: false };
+      time = 0;
+      // Restart the staggered timing
+      setTimeout(() => { started.line2 = true; }, 1500);
+      setTimeout(() => { started.line3 = true; }, 3250);
+    }
+    
+    bg_gradient_animation();
+    
+    function bg_gradient_animation() {
+      time += 0.016 * currentSpeed; // Roughly 60fps timing, multiplied by speed
+      
+      if (currentAnimation === 'sweep') {
+        updateLineSweep('line1', line1);
+        updateLineSweep('line2', line2);
+        updateLineSweep('line3', line3);
+      } else if (currentAnimation === 'pulse') {
+        updateLinePulse('line1', line1, 0);
+        updateLinePulse('line2', line2, 0.5);
+        updateLinePulse('line3', line3, 1);
+      } else if (currentAnimation === 'wave') {
+        updateLineWave('line1', line1, 0);
+        updateLineWave('line2', line2, 0.3);
+        updateLineWave('line3', line3, 0.6);
+      } else if (currentAnimation === 'cascade') {
+        updateLineCascade('line1', line1);
+        updateLineCascade('line2', line2);
+        updateLineCascade('line3', line3);
+      } else if (currentAnimation === 'breathe') {
+        updateLineBreathe('line1', line1, 0);
+        updateLineBreathe('line2', line2, -0.7);
+        updateLineBreathe('line3', line3, -1.4);
+      }
+      
+      requestAnimationFrame(bg_gradient_animation);
+    }
+    
+    // Original sweep animation
+    function updateLineSweep(key, element) {
+      if (!started[key]) {
+        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
+        return;
+      }
+      
+      // If completed and not looping, stay highlighted
+      if (completed[key] && !loopEnabled) {
+        applyFullHighlight(element);
+        return;
+      }
+      
+      // Always move forward at consistent speed
+      positions[key] += 0.25 * currentSpeed;
+      
+      if (positions[key] >= 120) {
+        if (!loopEnabled) {
+          completed[key] = true;
+          applyFullHighlight(element);
+          return;
+        }
+        // Reset for loop
+        positions[key] = -20;
+      }
+      
+      applyGradient(element, positions[key]);
+    }
+    
+    // Pulse - expands from center outward
+    function updateLinePulse(key, element, offset) {
+      if (!started[key]) {
+        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
+        return;
+      }
+      
+      if (completed[key] && !loopEnabled) {
+        applyFullHighlight(element);
+        return;
+      }
+      
+      var cycleTime = (time + offset) * 2;
+      var pulse = (Math.sin(cycleTime) + 1) / 2 * 50;
+      
+      // Check if one cycle completed (when sin returns to start after going through full cycle)
+      if (!loopEnabled && cycleTime > Math.PI * 2) {
+        completed[key] = true;
+        applyFullHighlight(element);
+        return;
+      }
+      
+      applyGradientCenter(element, pulse);
+    }
+    
+    // Wave - sinusoidal movement
+    function updateLineWave(key, element, offset) {
+      if (!started[key]) {
+        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
+        return;
+      }
+      
+      if (completed[key] && !loopEnabled) {
+        applyFullHighlight(element);
+        return;
+      }
+      
+      var cycleTime = (time + offset) * 1.5;
+      var pos = (Math.sin(cycleTime) + 1) / 2 * 100;
+      
+      if (!loopEnabled && cycleTime > Math.PI * 2) {
+        completed[key] = true;
+        applyFullHighlight(element);
+        return;
+      }
+      
+      applyGradient(element, pos);
+    }
+    
+    // Cascade - continuous left to right, staggered
+    function updateLineCascade(key, element) {
+      if (!started[key]) {
+        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
+        return;
+      }
+      
+      if (completed[key] && !loopEnabled) {
+        applyFullHighlight(element);
+        return;
+      }
+      
+      positions[key] += 0.4 * currentSpeed;
+      
+      if (positions[key] > 120) {
+        if (!loopEnabled) {
+          completed[key] = true;
+          applyFullHighlight(element);
+          return;
+        }
+        positions[key] = -20;
+      }
+      
+      applyGradient(element, positions[key]);
+    }
+    
+    // Breathe - gentle full-text glow in and out
+    function updateLineBreathe(key, element, offset) {
+      if (!started[key]) {
+        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
+        return;
+      }
+      
+      if (completed[key] && !loopEnabled) {
+        applyFullHighlight(element);
+        return;
+      }
+      
+      var cycleTime = (time + offset) * 1.2;
+      var intensity = (Math.sin(cycleTime) + 1) / 2;
+      
+      // Stop at peak brightness (when intensity reaches ~1) instead of full cycle
+      if (!loopEnabled && intensity >= 0.99) {
+        completed[key] = true;
+        applyFullHighlight(element);
+        return;
+      }
+      
+      applyGradientBreathe(element, intensity);
+    }
+    
+    function applyFullHighlight(element) {
+      let gradient;
+      
+      if (currentTheme === 'rainbow') {
+        gradient = `linear-gradient(to right, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff)`;
+      } else if (currentTheme === 'white') {
+        gradient = `linear-gradient(to right, #ffffff, #ffffff)`;
+      } else if (currentTheme === 'orange') {
+        gradient = `linear-gradient(to right, #f0a54f, #f0a54f)`;
+      } else if (currentTheme === 'green') {
+        gradient = `linear-gradient(to right, #00ff88, #00ff88)`;
+      }
+      
+      element.style.backgroundImage = gradient;
+    }
+    
+    function applyGradient(element, pos) {
+      let gradient;
+      
+      if (currentTheme === 'rainbow') {
+        gradient = `linear-gradient(to right, 
+          #333 ${pos - 15}%, 
+          #ff0000 ${pos - 10}%, 
+          #ff8800 ${pos - 5}%, 
+          #ffff00 ${pos}%, 
+          #00ff00 ${pos + 5}%, 
+          #0088ff ${pos + 10}%, 
+          #8800ff ${pos + 15}%, 
+          #333 ${pos + 20}%)`;
+      } else if (currentTheme === 'white') {
+        gradient = `linear-gradient(to right, 
+          #333 ${pos - 10}%, 
+          #ffffff ${pos}%, 
+          #333 ${pos + 10}%)`;
+      } else if (currentTheme === 'orange') {
+        gradient = `linear-gradient(to right, 
+          #333 ${pos - 10}%, 
+          #dd8448 ${pos - 5}%, 
+          #f0a54f ${pos}%, 
+          #dd8448 ${pos + 5}%, 
+          #333 ${pos + 10}%)`;
+      } else if (currentTheme === 'green') {
+        gradient = `linear-gradient(to right, 
+          #333 ${pos - 10}%, 
+          #00cc6a ${pos - 5}%, 
+          #00ff88 ${pos}%, 
+          #00cc6a ${pos + 5}%, 
+          #333 ${pos + 10}%)`;
+      }
+      
+      element.style.backgroundImage = gradient;
+    }
+    
+    function applyGradientCenter(element, spread) {
+      let gradient;
+      var left = 50 - spread;
+      var right = 50 + spread;
+      
+      if (currentTheme === 'rainbow') {
+        gradient = `linear-gradient(to right, 
+          #333 ${left - 10}%, 
+          #ff0000 ${left}%, 
+          #ff8800 ${left + spread/3}%, 
+          #ffff00 50%, 
+          #00ff00 ${right - spread/3}%, 
+          #0088ff ${right}%, 
+          #333 ${right + 10}%)`;
+      } else if (currentTheme === 'white') {
+        gradient = `linear-gradient(to right, 
+          #333 ${left}%, 
+          #ffffff 50%, 
+          #333 ${right}%)`;
+      } else if (currentTheme === 'orange') {
+        gradient = `linear-gradient(to right, 
+          #333 ${left}%, 
+          #dd8448 ${left + spread/2}%, 
+          #f0a54f 50%, 
+          #dd8448 ${right - spread/2}%, 
+          #333 ${right}%)`;
+      } else if (currentTheme === 'green') {
+        gradient = `linear-gradient(to right, 
+          #333 ${left}%, 
+          #00cc6a ${left + spread/2}%, 
+          #00ff88 50%, 
+          #00cc6a ${right - spread/2}%, 
+          #333 ${right}%)`;
+      }
+      
+      element.style.backgroundImage = gradient;
+    }
+    
+    function applyGradientBreathe(element, intensity) {
+      let color1, color2;
+      
+      if (currentTheme === 'rainbow') {
+        var r = Math.floor(51 + intensity * 204);
+        var g = Math.floor(51 + intensity * 136);
+        var b = Math.floor(51 + intensity * 204);
+        color1 = `rgb(${r}, ${Math.floor(51 + intensity * 85)}, ${Math.floor(51 + intensity * 50)})`;
+        color2 = `rgb(${Math.floor(51 + intensity * 100)}, ${g}, ${b})`;
+        element.style.backgroundImage = `linear-gradient(to right, ${color1}, ${color2})`;
+      } else if (currentTheme === 'white') {
+        var v = Math.floor(51 + intensity * 204);
+        element.style.backgroundImage = `linear-gradient(to right, rgb(${v},${v},${v}), rgb(${v},${v},${v}))`;
+      } else if (currentTheme === 'orange') {
+        var r = Math.floor(51 + intensity * 189);
+        var g = Math.floor(51 + intensity * 114);
+        var b = Math.floor(51 + intensity * 28);
+        element.style.backgroundImage = `linear-gradient(to right, rgb(${r},${g},${b}), rgb(${r},${g},${b}))`;
+      } else if (currentTheme === 'green') {
+        var r = Math.floor(51 + intensity * 0);
+        var g = Math.floor(51 + intensity * 204);
+        var b = Math.floor(51 + intensity * 85);
+        element.style.backgroundImage = `linear-gradient(to right, rgb(${r},${g},${b}), rgb(${r},${g},${b}))`;
+      }
+    }
+  </script>
 </body>
 </html>
