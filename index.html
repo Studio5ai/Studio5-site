@@ -3,708 +3,1092 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cool CSS/JS Effect</title>
+  <title>Studio Five – Sovereign AI Infrastructure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
-    * {
+    :root {
+      --color-bg: #000000;
+      --color-bg-elevated: #0a0a0a;
+      --color-surface: #111111;
+      --color-border: #1a1a1a;
+      --color-text: #ffffff;
+      --color-text-muted: #888888;
+      --color-text-dim: #555555;
+      --color-accent: #3b82f6;
+      --color-accent-glow: rgba(59, 130, 246, 0.3);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
-      width: 100%;
-      height: 100%;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: #000;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Star layers */
-    .stars, .stars1, .stars2 {
+    /* Starfield Background */
+    .starfield {
       position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stars, .stars2, .stars3 {
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      pointer-events: none;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: transparent;
     }
 
-    /* Small stars - 2px, slow */
     .stars {
-      z-index: 1;
-      width: 2px;
-      height: 2px;
-      border-radius: 50%;
-      background: transparent;
       box-shadow: 
-        1247px 391px #FFF, 834px 1829px #FFF, 2145px 672px #FFF, 456px 2301px #FFF,
-        1678px 1092px #FFF, 923px 567px #FFF, 2389px 1456px #FFF, 234px 1789px #FFF,
-        1523px 234px #FFF, 2012px 1890px #FFF, 678px 1345px #FFF, 1890px 890px #FFF,
-        345px 2134px #FFF, 1456px 1567px #FFF, 2234px 345px #FFF, 789px 987px #FFF,
-        1901px 1234px #FFF, 567px 1876px #FFF, 2456px 678px #FFF, 1123px 2345px #FFF,
-        987px 1543px #FFF, 1765px 876px #FFF, 2301px 1987px #FFF, 543px 1234px #FFF,
-        1432px 765px #FFF, 876px 2123px #FFF, 2167px 432px #FFF, 321px 1654px #FFF,
-        1654px 987px #FFF, 2023px 1321px #FFF, 765px 543px #FFF, 1987px 2234px #FFF,
-        432px 876px #FFF, 1321px 1765px #FFF, 2432px 1098px #FFF, 654px 321px #FFF,
-        2134px 987px #FFF, 876px 1654px #FFF, 1543px 432px #FFF, 2301px 1876px #FFF,
-        412px 1654px #FFF, 1876px 923px #FFF, 2398px 567px #FFF, 734px 2012px #FFF,
-        1589px 1345px #FFF, 2201px 890px #FFF, 445px 1789px #FFF, 1756px 2301px #FFF,
-        2089px 1092px #FFF, 876px 234px #FFF, 1234px 1567px #FFF, 2412px 456px #FFF,
-        678px 1890px #FFF, 1987px 672px #FFF, 2234px 1829px #FFF, 523px 1234px #FFF,
-        1401px 2145px #FFF, 2301px 765px #FFF, 789px 1432px #FFF, 1654px 987px #FFF,
-        2145px 2023px #FFF, 432px 1765px #FFF, 1789px 876px #FFF, 2023px 1654px #FFF,
-        567px 2234px #FFF, 1432px 543px #FFF, 2301px 1321px #FFF, 876px 1987px #FFF,
-        1654px 234px #FFF, 2089px 1876px #FFF, 345px 1098px #FFF, 1765px 2301px #FFF;
-      animation: animStar 800s linear infinite;
+        1247px 391px rgba(255,255,255,0.8), 834px 1829px rgba(255,255,255,0.6), 
+        2145px 672px rgba(255,255,255,0.7), 456px 2301px rgba(255,255,255,0.5),
+        1678px 1092px rgba(255,255,255,0.9), 923px 567px rgba(255,255,255,0.4), 
+        2389px 1456px rgba(255,255,255,0.6), 234px 1789px rgba(255,255,255,0.8),
+        1523px 234px rgba(255,255,255,0.5), 2012px 1890px rgba(255,255,255,0.7), 
+        678px 1345px rgba(255,255,255,0.4), 1890px 890px rgba(255,255,255,0.6),
+        345px 2134px rgba(255,255,255,0.8), 1456px 1567px rgba(255,255,255,0.5), 
+        2234px 345px rgba(255,255,255,0.7), 789px 987px rgba(255,255,255,0.4),
+        1901px 1234px rgba(255,255,255,0.6), 567px 1876px rgba(255,255,255,0.8), 
+        2456px 678px rgba(255,255,255,0.5), 1123px 2345px rgba(255,255,255,0.7),
+        156px 456px rgba(255,255,255,0.6), 2678px 234px rgba(255,255,255,0.4),
+        890px 1567px rgba(255,255,255,0.8), 1234px 890px rgba(255,255,255,0.5),
+        2012px 1234px rgba(255,255,255,0.7), 456px 678px rgba(255,255,255,0.6),
+        1678px 2012px rgba(255,255,255,0.4), 234px 1234px rgba(255,255,255,0.8),
+        2345px 567px rgba(255,255,255,0.5), 678px 2345px rgba(255,255,255,0.7);
+      animation: drift 200s linear infinite;
     }
 
-    .stars:after {
-      content: " ";
-      position: absolute;
-      top: -600px;
-      width: 2px;
-      height: 2px;
-      border-radius: 50%;
-      background: transparent;
-      box-shadow: 
-        1247px 391px #FFF, 834px 1829px #FFF, 2145px 672px #FFF, 456px 2301px #FFF,
-        1678px 1092px #FFF, 923px 567px #FFF, 2389px 1456px #FFF, 234px 1789px #FFF,
-        1523px 234px #FFF, 2012px 1890px #FFF, 678px 1345px #FFF, 1890px 890px #FFF,
-        345px 2134px #FFF, 1456px 1567px #FFF, 2234px 345px #FFF, 789px 987px #FFF,
-        1901px 1234px #FFF, 567px 1876px #FFF, 2456px 678px #FFF, 1123px 2345px #FFF,
-        987px 1543px #FFF, 1765px 876px #FFF, 2301px 1987px #FFF, 543px 1234px #FFF,
-        1432px 765px #FFF, 876px 2123px #FFF, 2167px 432px #FFF, 321px 1654px #FFF,
-        1654px 987px #FFF, 2023px 1321px #FFF, 765px 543px #FFF, 1987px 2234px #FFF,
-        432px 876px #FFF, 1321px 1765px #FFF, 2432px 1098px #FFF, 654px 321px #FFF;
-    }
-
-    /* Medium stars - 3px, medium speed */
-    .stars1 {
-      z-index: 1;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: transparent;
-      box-shadow: 
-        765px 2234px #FFF, 1987px 765px #FFF, 432px 1432px #FFF, 1765px 2023px #FFF,
-        2432px 1234px #FFF, 543px 876px #FFF, 1876px 1543px #FFF, 987px 321px #FFF,
-        1234px 1987px #FFF, 2023px 654px #FFF, 321px 1765px #FFF, 1654px 2301px #FFF,
-        1432px 1234px #FFF, 2234px 876px #FFF, 765px 1987px #FFF, 1876px 432px #FFF,
-        543px 1654px #FFF, 2023px 2301px #FFF, 987px 765px #FFF, 1765px 1432px #FFF,
-        412px 1876px #FFF, 1654px 543px #FFF, 2301px 1987px #FFF, 876px 2134px #FFF,
-        1234px 654px #FFF, 2134px 1432px #FFF, 567px 2023px #FFF, 1987px 876px #FFF,
-        2301px 1765px #FFF, 734px 1234px #FFF, 1543px 2301px #FFF, 2023px 987px #FFF,
-        456px 1654px #FFF, 1765px 321px #FFF, 2234px 1543px #FFF, 876px 1987px #FFF,
-        1432px 2234px #FFF, 2134px 765px #FFF, 654px 1432px #FFF, 1876px 2023px #FFF;
-      animation: animStar 450s linear infinite;
-    }
-
-    .stars1:after {
-      content: " ";
-      position: absolute;
-      top: -600px;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: transparent;
-      box-shadow: 
-        765px 2234px #FFF, 1987px 765px #FFF, 432px 1432px #FFF, 1765px 2023px #FFF,
-        2432px 1234px #FFF, 543px 876px #FFF, 1876px 1543px #FFF, 987px 321px #FFF,
-        1234px 1987px #FFF, 2023px 654px #FFF, 321px 1765px #FFF, 1654px 2301px #FFF,
-        1432px 1234px #FFF, 2234px 876px #FFF, 765px 1987px #FFF, 1876px 432px #FFF;
-    }
-
-    /* Large stars - 4px, fast */
     .stars2 {
-      z-index: 1;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: transparent;
+      width: 1px;
+      height: 1px;
       box-shadow: 
-        1654px 2134px #FFF, 2301px 765px #FFF, 876px 1432px #FFF, 1987px 1876px #FFF,
-        432px 987px #FFF, 2023px 1234px #FFF, 1234px 543px #FFF, 765px 2301px #FFF,
-        1876px 654px #FFF, 2432px 1765px #FFF, 543px 1987px #FFF, 1543px 321px #FFF,
-        987px 1654px #FFF, 2234px 2023px #FFF, 321px 876px #FFF, 1765px 1098px #FFF,
-        2134px 1432px #FFF, 456px 2301px #FFF, 1432px 765px #FFF, 2301px 1987px #FFF,
-        876px 543px #FFF, 1765px 2234px #FFF, 2023px 876px #FFF, 654px 1654px #FFF,
-        1987px 1234px #FFF, 2301px 2023px #FFF, 432px 1765px #FFF, 1654px 987px #FFF,
-        2234px 1543px #FFF, 765px 1876px #FFF, 1543px 2301px #FFF, 2134px 654px #FFF;
-      animation: animStar 250s linear infinite;
+        512px 789px rgba(255,255,255,0.3), 1678px 234px rgba(255,255,255,0.2),
+        234px 1456px rgba(255,255,255,0.4), 2567px 890px rgba(255,255,255,0.3),
+        890px 2234px rgba(255,255,255,0.2), 1234px 567px rgba(255,255,255,0.4),
+        2012px 1789px rgba(255,255,255,0.3), 567px 345px rgba(255,255,255,0.2),
+        1890px 1123px rgba(255,255,255,0.4), 345px 2567px rgba(255,255,255,0.3),
+        2234px 456px rgba(255,255,255,0.2), 678px 1890px rgba(255,255,255,0.4),
+        1456px 2012px rgba(255,255,255,0.3), 2890px 678px rgba(255,255,255,0.2),
+        123px 1234px rgba(255,255,255,0.4), 1789px 345px rgba(255,255,255,0.3);
+      animation: drift 300s linear infinite;
     }
 
-    .stars2:after {
-      content: " ";
-      position: absolute;
-      top: -600px;
+    .stars3 {
       width: 3px;
       height: 3px;
-      border-radius: 50%;
-      background: transparent;
       box-shadow: 
-        1654px 2134px #FFF, 2301px 765px #FFF, 876px 1432px #FFF, 1987px 1876px #FFF,
-        432px 987px #FFF, 2023px 1234px #FFF, 1234px 543px #FFF, 765px 2301px #FFF,
-        1876px 654px #FFF, 2432px 1765px #FFF, 543px 1987px #FFF, 1543px 321px #FFF,
-        987px 1654px #FFF, 2234px 2023px #FFF, 321px 876px #FFF, 1765px 1098px #FFF;
+        1890px 567px rgba(255,255,255,0.15), 456px 1234px rgba(255,255,255,0.1),
+        2345px 890px rgba(255,255,255,0.12), 789px 2012px rgba(255,255,255,0.08),
+        1234px 1567px rgba(255,255,255,0.15), 2678px 234px rgba(255,255,255,0.1);
+      animation: drift 150s linear infinite;
     }
 
-    @keyframes animStar {
-      from {
-        transform: translateY(0px) translateX(0px);
-      }
-      to {
-        transform: translateY(-2560px) translateX(-2560px);
-      }
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-2560px, -2560px); }
     }
 
-    #container {
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(0,0,0,0.5);
+      border-bottom: 1px solid var(--color-border);
+      transition: all 0.4s ease;
+    }
+
+    nav.scrolled {
+      padding: 1rem 3rem;
+      background: rgba(0,0,0,0.85);
+    }
+
+    .nav-logo {
+      height: 44px;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+      transform: scale(1.02);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
       position: relative;
-      z-index: 10;
-      width: 70%;
-      margin: 30px auto;
-      text-align: center;
     }
 
-    .line {
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-text);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.5rem;
+      background: var(--color-text);
+      color: var(--color-bg);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--color-accent);
+      color: var(--color-text);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--color-accent-glow);
+    }
+
+    /* Hero Section */
+    .hero {
       position: relative;
-      font-size: 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      font-family: sans-serif;
+      padding: 8rem 2rem 4rem;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hero-logo {
+      width: 280px;
+      max-width: 60vw;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(40px) scale(0.9);
+      filter: drop-shadow(0 0 60px rgba(255,255,255,0.15));
+    }
+
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-tagline span {
+      display: block;
+      background: linear-gradient(135deg, #ffffff 0%, #888888 50%, #ffffff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      display: block;
-      margin: 0;
-      line-height: 1.2;
     }
 
-    @media screen and (max-width: 510px) {
-      .line {
-        font-size: 50px;
-      }
+    .hero-sub {
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      font-weight: 300;
+      line-height: 1.7;
     }
 
-    @media screen and (max-width: 360px) {
-      .line {
-        font-size: 35px;
-      }
-    }
-    
-    /* Toggle buttons */
-    .color-toggle {
-      position: fixed;
-      top: 24px;
-      right: 24px;
+    .hero-cta-group {
       display: flex;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      padding: 8px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      z-index: 1000;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
     }
-    
-    .animation-toggle {
-      position: fixed;
-      top: 80px;
-      right: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      padding: 8px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      z-index: 1000;
-    }
-    
-    .toggle-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      border: 2px solid transparent;
+
+    .btn-primary {
+      padding: 1rem 2.5rem;
+      background: var(--color-text);
+      color: var(--color-bg);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      border: none;
       cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent);
+      color: var(--color-text);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px var(--color-accent-glow);
+    }
+
+    .btn-secondary {
+      padding: 1rem 2.5rem;
+      background: transparent;
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
       transition: all 0.3s ease;
     }
-    
-    .anim-btn {
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      font-family: sans-serif;
-      font-size: 12px;
-      text-align: left;
+
+    .btn-secondary:hover {
+      border-color: var(--color-text-muted);
+      background: rgba(255,255,255,0.03);
     }
-    
-    .toggle-btn.active,
-    .anim-btn.active {
-      border-color: white;
-      box-shadow: 0 0 12px currentColor;
-    }
-    
-    .anim-btn.active {
-      background: rgba(255, 255, 255, 0.2);
-    }
-    
-    .speed-toggle {
-      position: fixed;
-      top: 280px;
-      right: 24px;
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      padding: 8px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      z-index: 1000;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 2s forwards;
     }
-    
-    .speed-label {
-      color: rgba(255, 255, 255, 0.5);
-      font-family: sans-serif;
-      font-size: 10px;
+
+    .scroll-indicator span {
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 0 4px;
+      letter-spacing: 0.2em;
+      color: var(--color-text-dim);
     }
-    
-    .loop-toggle {
-      position: fixed;
-      top: 435px;
-      right: 24px;
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--color-text-muted), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; }
+    }
+
+    /* Problem Section */
+    .section-problem {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 2rem;
+      background: linear-gradient(180deg, transparent 0%, var(--color-bg-elevated) 20%, var(--color-bg-elevated) 80%, transparent 100%);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      opacity: 0;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .problem-card {
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .problem-card:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--color-text-dim);
+      transform: translateY(-5px);
+    }
+
+    .problem-card h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .problem-card p {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Solution Section */
+    .section-solution {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 2rem;
+    }
+
+    .solution-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 400;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto 6rem;
+      line-height: 1.15;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .solution-headline .highlight {
+      background: linear-gradient(90deg, var(--color-accent), #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto 6rem;
+      text-align: center;
+    }
+
+    .stat-item {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Features Section */
+    .section-features {
+      position: relative;
+      z-index: 1;
+      padding: 8rem 2rem;
+      background: var(--color-bg-elevated);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 4rem auto 0;
+    }
+
+    .feature-item {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .feature-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--color-border);
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .feature-desc {
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* Comparison Section */
+    .section-comparison {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 2rem;
+    }
+
+    .comparison-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--color-border);
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-left {
+      text-align: right;
+      color: var(--color-text-dim);
+      font-size: 1rem;
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,100,100,0.3);
+    }
+
+    .comparison-vs {
+      font-size: 0.75rem;
+      color: var(--color-text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .comparison-right {
+      color: var(--color-text);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* CTA Section */
+    .section-cta {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.05) 50%, transparent 100%);
+    }
+
+    .cta-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .cta-sub {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .cta-buttons {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      padding: 8px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      z-index: 1000;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
     }
-    
-    .toggle-btn-rainbow {
-      background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff);
-      color: #ffff00;
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
     }
-    
-    .toggle-btn-white {
-      background: linear-gradient(135deg, #ffffff, #cccccc);
-      color: #ffffff;
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    
-    .toggle-btn-orange {
-      background: linear-gradient(135deg, #f0a54f, #dd8448);
-      color: #f0a54f;
+
+    .footer-logo {
+      height: 32px;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
     }
-    
-    .toggle-btn-green {
-      background: linear-gradient(135deg, #00ff88, #00cc6a);
-      color: #00ff88;
+
+    .footer-logo:hover {
+      opacity: 1;
+    }
+
+    .footer-text {
+      font-size: 0.875rem;
+      color: var(--color-text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .comparison-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+      }
+      
+      .comparison-left {
+        text-align: center;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hero {
+        padding: 6rem 1.5rem 4rem;
+      }
+      
+      .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .section-problem,
+      .section-solution,
+      .section-features,
+      .section-comparison,
+      .section-cta {
+        padding: 6rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Starfield background -->
-  <div class="stars"></div>
-  <div class="stars1"></div>
-  <div class="stars2"></div>
-
-  <!-- Controls -->
-  <div class="color-toggle">
-    <button class="toggle-btn toggle-btn-rainbow active" onclick="setTheme('rainbow')" title="Rainbow"></button>
-    <button class="toggle-btn toggle-btn-white" onclick="setTheme('white')" title="White"></button>
-    <button class="toggle-btn toggle-btn-orange" onclick="setTheme('orange')" title="Orange"></button>
-    <button class="toggle-btn toggle-btn-green" onclick="setTheme('green')" title="Green"></button>
-  </div>
-  
-  <div class="animation-toggle">
-    <button class="anim-btn active" onclick="setAnimation('sweep')" id="anim-sweep">Sweep</button>
-    <button class="anim-btn" onclick="setAnimation('pulse')" id="anim-pulse">Pulse</button>
-    <button class="anim-btn" onclick="setAnimation('wave')" id="anim-wave">Wave</button>
-    <button class="anim-btn" onclick="setAnimation('cascade')" id="anim-cascade">Cascade</button>
-    <button class="anim-btn" onclick="setAnimation('breathe')" id="anim-breathe">Breathe</button>
-  </div>
-  
-  <div class="speed-toggle">
-    <span class="speed-label">Speed</span>
-    <button class="anim-btn" onclick="setSpeed(0.5)" id="speed-slow">Slow</button>
-    <button class="anim-btn active" onclick="setSpeed(1)" id="speed-normal">Normal</button>
-    <button class="anim-btn" onclick="setSpeed(1.5)" id="speed-fast">Fast</button>
-    <button class="anim-btn" onclick="setSpeed(2.5)" id="speed-faster">Faster</button>
-  </div>
-  
-  <div class="loop-toggle">
-    <span class="speed-label">Loop</span>
-    <button class="anim-btn active" onclick="setLoop(true)" id="loop-on">Loop</button>
-    <button class="anim-btn" onclick="setLoop(false)" id="loop-off">Once</button>
-    <button class="anim-btn" onclick="resetAnimation()" id="loop-reset">Reset</button>
+  <!-- Starfield Background -->
+  <div class="starfield">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
   </div>
 
-  <div id="container">
-    <h1 class="line" id="line1">Your AI.</h1>
-    <h1 class="line" id="line2">Your Building.</h1>
-    <h1 class="line" id="line3">No one else's rules.</h1>
-  </div>
+  <!-- Navigation -->
+  <nav>
+    <img src="logo.png" alt="Studio Five" class="nav-logo">
+    <ul class="nav-links">
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#solution">Solution</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:contact@studiofive.ai" class="nav-cta">Request Demo</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="logo.png" alt="Studio Five" class="hero-logo">
+    <h1 class="hero-tagline">
+      <span>Declare Independence</span>
+      <span>From the Cloud Empires</span>
+    </h1>
+    <p class="hero-sub">
+      The world's most powerful privately-owned, air-gapped AI supercluster. 
+      Run trillion-parameter models completely offline—no cloud, no subscriptions, 
+      no data ever leaves your building.
+    </p>
+    <div class="hero-cta-group">
+      <a href="mailto:contact@studiofive.ai" class="btn-primary">Request Private Demo</a>
+      <a href="#solution" class="btn-secondary">Learn More</a>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="section-problem" id="problem">
+    <div class="section-inner">
+      <span class="section-label">The Problem</span>
+      <h2 class="section-title">
+        Amazon, Microsoft, and Google control 70% of the cloud market—and they're 
+        turning AI into their most profitable lock-in ever.
+      </h2>
+      
+      <div class="problem-grid">
+        <div class="problem-card">
+          <h3>Data Hostage</h3>
+          <p>Your most sensitive data sits on someone else's servers. Forever. You have zero real control over your prompts, outputs, or models.</p>
+        </div>
+        <div class="problem-card">
+          <h3>Escalating Costs</h3>
+          <p>Every month the bill gets bigger and you still own nothing. Every token you generate is another recurring tax—with no end.</p>
+        </div>
+        <div class="problem-card">
+          <h3>Performance Roulette</h3>
+          <p>Your speed and uptime depend on someone else's queue and goodwill. You're paying millions for intelligence you'll never actually own.</p>
+        </div>
+        <div class="problem-card">
+          <h3>Compliance Risk</h3>
+          <p>One new regulation can shut your entire AI program down overnight. Public AI services are becoming legally impossible for sensitive data.</p>
+        </div>
+        <div class="problem-card">
+          <h3>Security Exposure</h3>
+          <p>As long as your data is in the cloud, it's vulnerable. Patient records, financials, storyboards, classified work—all at risk.</p>
+        </div>
+        <div class="problem-card">
+          <h3>Supply Chain Uncertainty</h3>
+          <p>When Musk buys out NVIDIA's entire GPU inventory, your cloud provider's queue gets longer. Your AI ambitions wait in line.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="section-solution" id="solution">
+    <div class="section-inner">
+      <h2 class="solution-headline">
+        We don't sell hardware.<br>
+        We sell <span class="highlight">freedom</span>.
+      </h2>
+      
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-number">4.1 TB/s</div>
+          <div class="stat-label">Memory Bandwidth</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1/10th</div>
+          <div class="stat-label">The Power</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1/4th</div>
+          <div class="stat-label">The Cost</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Zero</div>
+          <div class="stat-label">Data Exposure</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section-features" id="features">
+    <div class="section-inner">
+      <span class="section-label">What We Deliver</span>
+      <h2 class="section-title">A compact, air-gapped supercomputer that lives in your office.</h2>
+      
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-number">01</div>
+          <h3 class="feature-title">True Ownership</h3>
+          <p class="feature-desc">Model weights are yours. ForgeOS + MLX runtime is yours forever. Zero per-token, zero per-hour, zero recurring anything. You pay once—you own it.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">02</div>
+          <h3 class="feature-title">Unmatched Performance</h3>
+          <p class="feature-desc">4.1 TB/s of zero-copy memory bandwidth across the cluster—more than twenty 8× H100 racks in raw memory throughput, at 1/10th the power.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">03</div>
+          <h3 class="feature-title">Complete Air-Gap</h3>
+          <p class="feature-desc">Nothing ever phones home or talks to the internet. Every model and piece of data is locked in a tamper-proof vault—even we can't get in.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">04</div>
+          <h3 class="feature-title">Compliance-Ready</h3>
+          <p class="feature-desc">HIPAA, ITAR, EU AI Act High-Risk, CMMC Level 3 capable. Zero-trust audit logging, automatic failover, encrypted-at-rest storage. Built to pass the toughest audits on day one.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">05</div>
+          <h3 class="feature-title">Deploy in Weeks</h3>
+          <p class="feature-desc">No data-center buildout required. 95%+ scaling efficiency. Turnkey cloud exit services with discovery, migration, parallel deployment, and 90-day post-migration support.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">06</div>
+          <h3 class="feature-title">Different Architecture</h3>
+          <p class="feature-desc">We're not on the NVIDIA train. When GPU supply chains choke, you won't have supply chain issues. It won't affect you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="section-comparison">
+    <div class="comparison-container">
+      <span class="section-label">The Difference</span>
+      <h2 class="section-title" style="margin-bottom: 4rem;">Cloud AI vs. Studio Five</h2>
+      
+      <div class="comparison-row">
+        <div class="comparison-left">Data in someone else's vault</div>
+        <div class="comparison-vs">→</div>
+        <div class="comparison-right">Zero data ever leaves your building</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-left">Endless subscription models</div>
+        <div class="comparison-vs">→</div>
+        <div class="comparison-right">Pay once, own forever</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-left">Performance depends on their queue</div>
+        <div class="comparison-vs">→</div>
+        <div class="comparison-right">Dedicated hardware, consistent speed</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-left">Escalating, unpredictable costs</div>
+        <div class="comparison-vs">→</div>
+        <div class="comparison-right">One-time CapEx, predictable OpEx</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-left">Moderation and policy restrictions</div>
+        <div class="comparison-vs">→</div>
+        <div class="comparison-right">Your AI, your rules</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-left">Compliance nightmares</div>
+        <div class="comparison-vs">→</div>
+        <div class="comparison-right">Audit-ready from day one</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-cta" id="contact">
+    <h2 class="cta-headline">Your AI. Your Building.<br>No One Else's Rules.</h2>
+    <p class="cta-sub">Join the companies declaring independence from rented intelligence.</p>
+    <div class="cta-buttons">
+      <a href="mailto:contact@studiofive.ai" class="btn-primary">Request Private Demo</a>
+      <a href="mailto:contact@studiofive.ai" class="btn-secondary">Contact Sales</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <img src="logo.png" alt="Studio Five" class="footer-logo">
+      <p class="footer-text">© 2025 Studio Five · Nashville</p>
+      <ul class="footer-links">
+        <li><a href="mailto:contact@studiofive.ai">Contact</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
 
   <script>
-    var line1 = document.getElementById('line1');
-    var line2 = document.getElementById('line2');
-    var line3 = document.getElementById('line3');
-    
-    // Each line has its own position tracker
-    var positions = { line1: -20, line2: -20, line3: -20 };
-    var directions = { line1: true, line2: true, line3: true };
-    var started = { line1: true, line2: false, line3: false };
-    
-    // Current theme and animation
-    var currentTheme = 'rainbow';
-    var currentAnimation = 'sweep';
-    var currentSpeed = 1;
-    var loopEnabled = true;
-    var completed = { line1: false, line2: false, line3: false };
-    var time = 0;
-    
-    // Start line 2 after 1.5 seconds
-    setTimeout(() => { started.line2 = true; }, 1500);
-    
-    // Start line 3 after 3.25 seconds (1.5 + 1.75)
-    setTimeout(() => { started.line3 = true; }, 3250);
-    
-    function setTheme(theme) {
-      currentTheme = theme;
-      document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelector('.toggle-btn-' + theme).classList.add('active');
-    }
-    
-    function setAnimation(anim) {
-      currentAnimation = anim;
-      document.querySelectorAll('.animation-toggle .anim-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById('anim-' + anim).classList.add('active');
-      // Reset positions for new animation
-      positions = { line1: -20, line2: -20, line3: -20 };
-      directions = { line1: true, line2: true, line3: true };
-    }
-    
-    function setSpeed(speed) {
-      currentSpeed = speed;
-      document.querySelectorAll('.speed-toggle .anim-btn').forEach(btn => btn.classList.remove('active'));
-      if (speed === 0.5) document.getElementById('speed-slow').classList.add('active');
-      else if (speed === 1) document.getElementById('speed-normal').classList.add('active');
-      else if (speed === 1.5) document.getElementById('speed-fast').classList.add('active');
-      else if (speed === 2.5) document.getElementById('speed-faster').classList.add('active');
-    }
-    
-    function setLoop(enabled) {
-      loopEnabled = enabled;
-      document.querySelectorAll('.loop-toggle .anim-btn').forEach(btn => btn.classList.remove('active'));
-      if (enabled) document.getElementById('loop-on').classList.add('active');
-      else document.getElementById('loop-off').classList.add('active');
-      // Reset completed status when changing loop mode
-      completed = { line1: false, line2: false, line3: false };
-    }
-    
-    function resetAnimation() {
-      positions = { line1: -20, line2: -20, line3: -20 };
-      directions = { line1: true, line2: true, line3: true };
-      completed = { line1: false, line2: false, line3: false };
-      started = { line1: true, line2: false, line3: false };
-      time = 0;
-      // Restart the staggered timing
-      setTimeout(() => { started.line2 = true; }, 1500);
-      setTimeout(() => { started.line3 = true; }, 3250);
-    }
-    
-    bg_gradient_animation();
-    
-    function bg_gradient_animation() {
-      time += 0.016 * currentSpeed; // Roughly 60fps timing, multiplied by speed
-      
-      if (currentAnimation === 'sweep') {
-        updateLineSweep('line1', line1);
-        updateLineSweep('line2', line2);
-        updateLineSweep('line3', line3);
-      } else if (currentAnimation === 'pulse') {
-        updateLinePulse('line1', line1, 0);
-        updateLinePulse('line2', line2, 0.5);
-        updateLinePulse('line3', line3, 1);
-      } else if (currentAnimation === 'wave') {
-        updateLineWave('line1', line1, 0);
-        updateLineWave('line2', line2, 0.3);
-        updateLineWave('line3', line3, 0.6);
-      } else if (currentAnimation === 'cascade') {
-        updateLineCascade('line1', line1);
-        updateLineCascade('line2', line2);
-        updateLineCascade('line3', line3);
-      } else if (currentAnimation === 'breathe') {
-        updateLineBreathe('line1', line1, 0);
-        updateLineBreathe('line2', line2, -0.7);
-        updateLineBreathe('line3', line3, -1.4);
+    // Register ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Navigation scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
       }
-      
-      requestAnimationFrame(bg_gradient_animation);
-    }
-    
-    // Original sweep animation
-    function updateLineSweep(key, element) {
-      if (!started[key]) {
-        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
-        return;
-      }
-      
-      // If completed and not looping, stay highlighted
-      if (completed[key] && !loopEnabled) {
-        applyFullHighlight(element);
-        return;
-      }
-      
-      // Always move forward at consistent speed
-      positions[key] += 0.25 * currentSpeed;
-      
-      if (positions[key] >= 120) {
-        if (!loopEnabled) {
-          completed[key] = true;
-          applyFullHighlight(element);
-          return;
+    });
+
+    // Hero animations
+    const heroTl = gsap.timeline({ delay: 0.3 });
+    heroTl
+      .to('.hero-logo', { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1, 
+        duration: 1.2, 
+        ease: 'power3.out' 
+      })
+      .to('.hero-tagline', { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1, 
+        ease: 'power3.out' 
+      }, '-=0.6')
+      .to('.hero-sub', { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        ease: 'power3.out' 
+      }, '-=0.5')
+      .to('.hero-cta-group', { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        ease: 'power3.out' 
+      }, '-=0.4');
+
+    // Section labels and titles
+    gsap.utils.toArray('.section-label').forEach(label => {
+      gsap.to(label, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: label,
+          start: 'top 85%',
+          end: 'top 60%',
+          scrub: 1
         }
-        // Reset for loop
-        positions[key] = -20;
-      }
-      
-      applyGradient(element, positions[key]);
-    }
-    
-    // Pulse - expands from center outward
-    function updateLinePulse(key, element, offset) {
-      if (!started[key]) {
-        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
-        return;
-      }
-      
-      if (completed[key] && !loopEnabled) {
-        applyFullHighlight(element);
-        return;
-      }
-      
-      var cycleTime = (time + offset) * 2;
-      var pulse = (Math.sin(cycleTime) + 1) / 2 * 50;
-      
-      // Check if one cycle completed (when sin returns to start after going through full cycle)
-      if (!loopEnabled && cycleTime > Math.PI * 2) {
-        completed[key] = true;
-        applyFullHighlight(element);
-        return;
-      }
-      
-      applyGradientCenter(element, pulse);
-    }
-    
-    // Wave - sinusoidal movement
-    function updateLineWave(key, element, offset) {
-      if (!started[key]) {
-        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
-        return;
-      }
-      
-      if (completed[key] && !loopEnabled) {
-        applyFullHighlight(element);
-        return;
-      }
-      
-      var cycleTime = (time + offset) * 1.5;
-      var pos = (Math.sin(cycleTime) + 1) / 2 * 100;
-      
-      if (!loopEnabled && cycleTime > Math.PI * 2) {
-        completed[key] = true;
-        applyFullHighlight(element);
-        return;
-      }
-      
-      applyGradient(element, pos);
-    }
-    
-    // Cascade - continuous left to right, staggered
-    function updateLineCascade(key, element) {
-      if (!started[key]) {
-        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
-        return;
-      }
-      
-      if (completed[key] && !loopEnabled) {
-        applyFullHighlight(element);
-        return;
-      }
-      
-      positions[key] += 0.4 * currentSpeed;
-      
-      if (positions[key] > 120) {
-        if (!loopEnabled) {
-          completed[key] = true;
-          applyFullHighlight(element);
-          return;
+      });
+    });
+
+    gsap.utils.toArray('.section-title').forEach(title => {
+      gsap.to(title, {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: title,
+          start: 'top 85%',
+          end: 'top 55%',
+          scrub: 1
         }
-        positions[key] = -20;
+      });
+    });
+
+    // Problem cards
+    gsap.utils.toArray('.problem-card').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+
+    // Solution headline
+    gsap.to('.solution-headline', {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: '.solution-headline',
+        start: 'top 80%',
+        end: 'top 50%',
+        scrub: 1
       }
-      
-      applyGradient(element, positions[key]);
-    }
-    
-    // Breathe - gentle full-text glow in and out
-    function updateLineBreathe(key, element, offset) {
-      if (!started[key]) {
-        element.style.backgroundImage = `linear-gradient(to right, #333 0%, #333 100%)`;
-        return;
+    });
+
+    // Stats
+    gsap.utils.toArray('.stat-item').forEach((stat, i) => {
+      gsap.to(stat, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: i * 0.15,
+        scrollTrigger: {
+          trigger: stat,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+
+    // Features
+    gsap.utils.toArray('.feature-item').forEach((item, i) => {
+      gsap.to(item, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+
+    // Comparison rows
+    gsap.utils.toArray('.comparison-row').forEach((row, i) => {
+      gsap.to(row, {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+
+    // CTA section
+    gsap.to('.cta-headline', {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: '.cta-headline',
+        start: 'top 80%',
+        end: 'top 50%',
+        scrub: 1
       }
-      
-      if (completed[key] && !loopEnabled) {
-        applyFullHighlight(element);
-        return;
+    });
+
+    gsap.to('.cta-sub', {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: '.cta-sub',
+        start: 'top 85%',
+        end: 'top 55%',
+        scrub: 1
       }
-      
-      var cycleTime = (time + offset) * 1.2;
-      var intensity = (Math.sin(cycleTime) + 1) / 2;
-      
-      // Stop at peak brightness (when intensity reaches ~1) instead of full cycle
-      if (!loopEnabled && intensity >= 0.99) {
-        completed[key] = true;
-        applyFullHighlight(element);
-        return;
+    });
+
+    gsap.to('.cta-buttons', {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: '.cta-buttons',
+        start: 'top 90%',
+        toggleActions: 'play none none reverse'
       }
-      
-      applyGradientBreathe(element, intensity);
-    }
-    
-    function applyFullHighlight(element) {
-      let gradient;
-      
-      if (currentTheme === 'rainbow') {
-        gradient = `linear-gradient(to right, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff)`;
-      } else if (currentTheme === 'white') {
-        gradient = `linear-gradient(to right, #ffffff, #ffffff)`;
-      } else if (currentTheme === 'orange') {
-        gradient = `linear-gradient(to right, #f0a54f, #f0a54f)`;
-      } else if (currentTheme === 'green') {
-        gradient = `linear-gradient(to right, #00ff88, #00ff88)`;
-      }
-      
-      element.style.backgroundImage = gradient;
-    }
-    
-    function applyGradient(element, pos) {
-      let gradient;
-      
-      if (currentTheme === 'rainbow') {
-        gradient = `linear-gradient(to right, 
-          #333 ${pos - 15}%, 
-          #ff0000 ${pos - 10}%, 
-          #ff8800 ${pos - 5}%, 
-          #ffff00 ${pos}%, 
-          #00ff00 ${pos + 5}%, 
-          #0088ff ${pos + 10}%, 
-          #8800ff ${pos + 15}%, 
-          #333 ${pos + 20}%)`;
-      } else if (currentTheme === 'white') {
-        gradient = `linear-gradient(to right, 
-          #333 ${pos - 10}%, 
-          #ffffff ${pos}%, 
-          #333 ${pos + 10}%)`;
-      } else if (currentTheme === 'orange') {
-        gradient = `linear-gradient(to right, 
-          #333 ${pos - 10}%, 
-          #dd8448 ${pos - 5}%, 
-          #f0a54f ${pos}%, 
-          #dd8448 ${pos + 5}%, 
-          #333 ${pos + 10}%)`;
-      } else if (currentTheme === 'green') {
-        gradient = `linear-gradient(to right, 
-          #333 ${pos - 10}%, 
-          #00cc6a ${pos - 5}%, 
-          #00ff88 ${pos}%, 
-          #00cc6a ${pos + 5}%, 
-          #333 ${pos + 10}%)`;
-      }
-      
-      element.style.backgroundImage = gradient;
-    }
-    
-    function applyGradientCenter(element, spread) {
-      let gradient;
-      var left = 50 - spread;
-      var right = 50 + spread;
-      
-      if (currentTheme === 'rainbow') {
-        gradient = `linear-gradient(to right, 
-          #333 ${left - 10}%, 
-          #ff0000 ${left}%, 
-          #ff8800 ${left + spread/3}%, 
-          #ffff00 50%, 
-          #00ff00 ${right - spread/3}%, 
-          #0088ff ${right}%, 
-          #333 ${right + 10}%)`;
-      } else if (currentTheme === 'white') {
-        gradient = `linear-gradient(to right, 
-          #333 ${left}%, 
-          #ffffff 50%, 
-          #333 ${right}%)`;
-      } else if (currentTheme === 'orange') {
-        gradient = `linear-gradient(to right, 
-          #333 ${left}%, 
-          #dd8448 ${left + spread/2}%, 
-          #f0a54f 50%, 
-          #dd8448 ${right - spread/2}%, 
-          #333 ${right}%)`;
-      } else if (currentTheme === 'green') {
-        gradient = `linear-gradient(to right, 
-          #333 ${left}%, 
-          #00cc6a ${left + spread/2}%, 
-          #00ff88 50%, 
-          #00cc6a ${right - spread/2}%, 
-          #333 ${right}%)`;
-      }
-      
-      element.style.backgroundImage = gradient;
-    }
-    
-    function applyGradientBreathe(element, intensity) {
-      let color1, color2;
-      
-      if (currentTheme === 'rainbow') {
-        var r = Math.floor(51 + intensity * 204);
-        var g = Math.floor(51 + intensity * 136);
-        var b = Math.floor(51 + intensity * 204);
-        color1 = `rgb(${r}, ${Math.floor(51 + intensity * 85)}, ${Math.floor(51 + intensity * 50)})`;
-        color2 = `rgb(${Math.floor(51 + intensity * 100)}, ${g}, ${b})`;
-        element.style.backgroundImage = `linear-gradient(to right, ${color1}, ${color2})`;
-      } else if (currentTheme === 'white') {
-        var v = Math.floor(51 + intensity * 204);
-        element.style.backgroundImage = `linear-gradient(to right, rgb(${v},${v},${v}), rgb(${v},${v},${v}))`;
-      } else if (currentTheme === 'orange') {
-        var r = Math.floor(51 + intensity * 189);
-        var g = Math.floor(51 + intensity * 114);
-        var b = Math.floor(51 + intensity * 28);
-        element.style.backgroundImage = `linear-gradient(to right, rgb(${r},${g},${b}), rgb(${r},${g},${b}))`;
-      } else if (currentTheme === 'green') {
-        var r = Math.floor(51 + intensity * 0);
-        var g = Math.floor(51 + intensity * 204);
-        var b = Math.floor(51 + intensity * 85);
-        element.style.backgroundImage = `linear-gradient(to right, rgb(${r},${g},${b}), rgb(${r},${g},${b}))`;
-      }
-    }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   </script>
 </body>
 </html>
