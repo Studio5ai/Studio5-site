@@ -919,40 +919,51 @@
       }
     });
 
-    // Hero animations
-    const heroTl = gsap.timeline({ delay: 0.3 });
+    // Hero animations - faster and more visible
+    const heroTl = gsap.timeline({ delay: 0.1 });
     heroTl
       .to('.hero-logo', {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 1.2,
-        ease: 'power3.out'
+        duration: 0.7,
+        ease: 'power2.out'
       })
       .to('.hero-tagline', {
         opacity: 1,
         y: 0,
-        duration: 1,
-        ease: 'power3.out'
-      }, '-=0.6')
+        duration: 0.6,
+        ease: 'power2.out'
+      }, '-=0.4')
       .to('.hero-sub', {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      }, '-=0.5')
+        duration: 0.5,
+        ease: 'power2.out'
+      }, '-=0.3')
       .to('.hero-cta-group', {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      }, '-=0.4');
+        duration: 0.5,
+        ease: 'power2.out'
+      }, '-=0.2');
 
-    // Enhanced Hero Parallax - multi-layer depth
+    // Enhanced Hero Parallax - multi-layer depth with smoother movement
     gsap.to('.hero-logo', {
+      y: 180,
+      scale: 0.85,
+      opacity: 0.4,
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5
+      }
+    });
+
+    gsap.to('.hero-tagline', {
       y: 250,
-      scale: 0.8,
-      opacity: 0.3,
+      opacity: 0.1,
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
@@ -961,9 +972,9 @@
       }
     });
 
-    gsap.to('.hero-tagline', {
-      y: 350,
-      opacity: 0,
+    gsap.to('.hero-sub', {
+      y: 300,
+      opacity: 0.1,
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
@@ -972,25 +983,14 @@
       }
     });
 
-    gsap.to('.hero-sub', {
-      y: 400,
-      opacity: 0,
+    gsap.to('.hero-cta-group', {
+      y: 350,
+      opacity: 0.1,
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
         end: 'bottom top',
         scrub: 3
-      }
-    });
-
-    gsap.to('.hero-cta-group', {
-      y: 450,
-      opacity: 0,
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 3.5
       }
     });
 
