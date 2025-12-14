@@ -948,47 +948,43 @@
         ease: 'power2.out'
       }, '-=0.2');
 
-    // Enhanced Hero Parallax - multi-layer depth with smoother movement
+    // Enhanced Hero Parallax - keeps content visible longer
     gsap.to('.hero-logo', {
-      y: 180,
-      scale: 0.85,
-      opacity: 0.4,
+      y: 100,
+      scale: 0.9,
       scrollTrigger: {
         trigger: '.hero',
-        start: 'top top',
+        start: 'center top',
         end: 'bottom top',
         scrub: 1.5
       }
     });
 
     gsap.to('.hero-tagline', {
-      y: 250,
-      opacity: 0.1,
+      y: 150,
       scrollTrigger: {
         trigger: '.hero',
-        start: 'top top',
+        start: 'center top',
         end: 'bottom top',
         scrub: 2
       }
     });
 
     gsap.to('.hero-sub', {
-      y: 300,
-      opacity: 0.1,
+      y: 200,
       scrollTrigger: {
         trigger: '.hero',
-        start: 'top top',
+        start: 'center top',
         end: 'bottom top',
         scrub: 2.5
       }
     });
 
     gsap.to('.hero-cta-group', {
-      y: 350,
-      opacity: 0.1,
+      y: 250,
       scrollTrigger: {
         trigger: '.hero',
-        start: 'top top',
+        start: 'center top',
         end: 'bottom top',
         scrub: 3
       }
