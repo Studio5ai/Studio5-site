@@ -6,7 +6,7 @@
   <title>Studio Five – Sovereign AI Infrastructure</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
@@ -637,6 +637,235 @@
       color: var(--color-text);
     }
 
+    /* Specs Section */
+    .section-specs {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 2rem;
+      background: var(--color-bg-elevated);
+    }
+
+    .specs-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      max-width: 1800px;
+      margin: 4rem auto 0;
+    }
+
+    .card-container {
+      padding: 2px;
+      border-radius: 24px;
+      position: relative;
+      width: 100%;
+      background: linear-gradient(
+          -30deg,
+          rgba(59, 130, 246, 0.15) 0%,
+          transparent 8%,
+          transparent 92%,
+          rgba(59, 130, 246, 0.15) 100%
+        ),
+        linear-gradient(
+          to bottom,
+          #0a0a0a,
+          #0a0a0a
+        );
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .inner-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .electric-border-canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .glow-layer-1 {
+      border: 2px solid var(--color-accent);
+      opacity: 0.5;
+      border-radius: 24px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(1px);
+    }
+
+    .glow-layer-2 {
+      border: 2px solid var(--color-accent);
+      border-radius: 24px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(4px);
+    }
+
+    .overlay-1 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      opacity: 0.25;
+      mix-blend-mode: overlay;
+      transform: scale(1.05);
+      filter: blur(8px);
+      background: linear-gradient(
+        -30deg,
+        var(--color-accent),
+        transparent 6%,
+        transparent 94%,
+        var(--color-accent)
+      );
+    }
+
+    .overlay-2 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      opacity: 0.125;
+      mix-blend-mode: overlay;
+      transform: scale(1.05);
+      filter: blur(8px);
+      background: linear-gradient(
+        -30deg,
+        var(--color-accent),
+        transparent 6%,
+        transparent 94%,
+        var(--color-accent)
+      );
+    }
+
+    .background-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      filter: blur(40px);
+      transform: scale(1.05);
+      opacity: 0.125;
+      z-index: -1;
+      background: linear-gradient(
+        -30deg,
+        var(--color-accent),
+        transparent 6%,
+        transparent 94%,
+        var(--color-accent)
+      );
+    }
+
+    .content-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+
+    .content-inner {
+      display: flex;
+      flex-direction: column;
+      padding: 28px 24px;
+      gap: 10px;
+    }
+
+    .spec-section-title {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      margin-bottom: 4px;
+    }
+
+    .spec-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .spec-item {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .spec-item::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      opacity: 0.6;
+    }
+
+    .spec-item strong,
+    .spec-item .highlight {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .spec-item .value {
+      color: var(--color-accent);
+      font-weight: 400;
+    }
+
+    .spec-sub {
+      padding-left: 20px;
+      font-size: 10px;
+      color: var(--color-text-dim);
+    }
+
+    .spec-sub::before {
+      content: '→';
+      opacity: 0.4;
+    }
+
     /* Responsive */
     @media (max-width: 968px) {
       .stats-row {
@@ -664,31 +893,48 @@
       }
     }
 
+    @media (max-width: 1400px) {
+      .specs-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 968px) {
+      .specs-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 768px) {
       nav {
         padding: 1rem 1.5rem;
       }
-      
+
       .nav-links {
         display: none;
       }
-      
+
       .hero {
         padding: 6rem 1.5rem 4rem;
       }
-      
+
       .hero-cta-group {
         flex-direction: column;
         width: 100%;
         max-width: 300px;
       }
-      
+
       .section-problem,
       .section-solution,
       .section-features,
       .section-comparison,
+      .section-specs,
       .section-cta {
         padding: 6rem 1.5rem;
+      }
+
+      .specs-container {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -708,6 +954,7 @@
       <li><a href="#problem">The Problem</a></li>
       <li><a href="#solution">Solution</a></li>
       <li><a href="#features">Features</a></li>
+      <li><a href="#specs">Specs</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="mailto:contact@studiofive.ai" class="nav-cta">Request Demo</a>
@@ -839,6 +1086,148 @@
           <h3 class="feature-title">Different Architecture</h3>
           <p class="feature-desc">We're not on the NVIDIA train. When GPU supply chains choke, you won't have supply chain issues. It won't affect you.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specs Section -->
+  <section class="section-specs" id="specs">
+    <div class="section-inner">
+      <span class="section-label">Technical Specifications</span>
+      <h2 class="section-title">Built Different</h2>
+
+      <div class="specs-container">
+
+        <!-- Card 1: Compute Layer -->
+        <div class="card-container">
+          <div class="inner-container">
+            <div class="canvas-container" id="card1-canvas-container">
+              <canvas id="electric-border-canvas-1" class="electric-border-canvas"></canvas>
+            </div>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Compute Layer</h2>
+              <div class="spec-list">
+                <p class="spec-item"><span class="value">160 ×</span> high-performance cores (AVX-512 class, <span class="highlight">4.05 GHz</span> all-core → <span class="highlight">5.4 GHz</span> peak)</p>
+                <p class="spec-item"><span class="value">400 ×</span> unified matrix/ray-tracing cores</p>
+                <p class="spec-item"><span class="value">160 ×</span> dedicated tensor accelerators (32 per node)</p>
+                <p class="spec-item"><span class="value">2.5 TB</span> pooled system memory, <span class="highlight">4 TB/s</span> bandwidth, true zero-copy across all nodes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Storage Layer -->
+        <div class="card-container">
+          <div class="inner-container">
+            <div class="canvas-container" id="card2-canvas-container">
+              <canvas id="electric-border-canvas-2" class="electric-border-canvas"></canvas>
+            </div>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Storage Layer</h2>
+              <div class="spec-list">
+                <p class="spec-item"><span class="value">480 TB</span> raw NVMe + <span class="value">80 TB</span> fast local SSDs (Expandable <span class="highlight">2 PB</span> total)</p>
+                <p class="spec-item">Sustained seq. read/write: <span class="value">30–36 GB/s</span> aggregate</p>
+                <p class="spec-item">Random read IOPS: <span class="value">3.3–3.7 million</span> (4K)</p>
+                <p class="spec-item">Total I/O across dual-plane fabric: <span class="value">520–580 Gbit/s</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Performance -->
+        <div class="card-container">
+          <div class="inner-container">
+            <div class="canvas-container" id="card3-canvas-container">
+              <canvas id="electric-border-canvas-3" class="electric-border-canvas"></canvas>
+            </div>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Performance</h2>
+              <p class="spec-sub">real measured, 1.1–1.4 T MoE, 128k context</p>
+              <div class="spec-list">
+                <p class="spec-item">FP32 aggregate: <span class="value">117 TFLOPS</span></p>
+                <p class="spec-item">INT8 sustained: <span class="value">935 TOPS</span></p>
+                <p class="spec-item">Tokens/sec (generation): <span class="value">750–980 t/s</span></p>
+                <p class="spec-item spec-sub">→ with dual-plane + speculative decoding: <span class="value">900–1,100 t/s</span></p>
+                <p class="spec-item">Time-to-first-token: <span class="value">28–65 ms</span></p>
+                <p class="spec-item">Model cold load (1.4 T): <span class="value">7–13 s</span> from NVMe</p>
+                <p class="spec-item">Fine-tuning 1 T model on 200 GB data: <span class="value">2.9–6 hours</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Physical & Power -->
+        <div class="card-container">
+          <div class="inner-container">
+            <div class="canvas-container" id="card4-canvas-container">
+              <canvas id="electric-border-canvas-4" class="electric-border-canvas"></canvas>
+            </div>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Physical & Power</h2>
+              <div class="spec-list">
+                <p class="spec-item">Power draw (full AI load): <span class="value">≤ 950 W</span></p>
+                <p class="spec-item">Noise (5 nodes full load): <span class="value">41–44 dBA</span> at 1 m</p>
+                <p class="spec-item">Rack option: <span class="value">12–14U</span> standard 19-inch</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Software & Security -->
+        <div class="card-container">
+          <div class="inner-container">
+            <div class="canvas-container" id="card5-canvas-container">
+              <canvas id="electric-border-canvas-5" class="electric-border-canvas"></canvas>
+            </div>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Software & Security</h2>
+              <div class="spec-list">
+                <p class="spec-item">Proprietary <span class="highlight">ForgeOS</span> (in development) – <span class="value">97–99 %</span> scaling efficiency across dual-plane ring</p>
+                <p class="spec-item"><span class="value">1.8–2.3 bit</span> quantization + LoRA serving stack</p>
+                <p class="spec-item">Hardware-isolated execution enclaves per node – secure boot, runtime vault, root-proof model/data protection</p>
+                <p class="spec-item"><span class="highlight">Full air-gap</span> – zero telemetry, zero external connectivity</p>
+                <p class="spec-item">Automatic failover across dual-plane, immutable zero-trust audit logs, <span class="highlight">FIPS 140-3</span> encrypted storage</p>
+                <p class="spec-item">Compliance-ready: <span class="value">HIPAA</span>, <span class="value">ITAR</span>, <span class="value">EU AI Act High-Risk</span>, <span class="value">CMMC Level 3</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1265,6 +1654,277 @@
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
+    });
+
+    // Specs section parallax
+    gsap.to('.section-specs', {
+      y: -100,
+      scrollTrigger: {
+        trigger: '.section-specs',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 3
+      }
+    });
+
+    // Specs cards animation
+    gsap.utils.toArray('.card-container').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // Individual card parallax
+      gsap.to(card, {
+        y: -60 - (i % 5) * 10,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 2 + (i % 5) * 0.2
+        }
+      });
+    });
+
+    // Electric Border Animation Class
+    let electricBorders = [];
+
+    class ElectricBorder {
+      constructor(canvasId, options = {}) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) return;
+
+        this.ctx = this.canvas.getContext("2d");
+        this.width = options.width || 354;
+        this.height = options.height || 504;
+        this.octaves = options.octaves || 10;
+        this.lacunarity = options.lacunarity || 1.6;
+        this.gain = options.gain || 0.6;
+        this.amplitude = options.amplitude || 0.2;
+        this.frequency = options.frequency || 5;
+        this.baseFlatness = options.baseFlatness || 0.2;
+        this.displacement = options.displacement || 60;
+        this.speed = options.speed || 1;
+        this.borderOffset = options.borderOffset || 60;
+        this.borderRadius = options.borderRadius || 40;
+        this.lineWidth = options.lineWidth || 1;
+        this.color = options.color || "#3b82f6";
+        this.animationId = null;
+        this.time = 0;
+        this.lastFrameTime = 0;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        this.start();
+      }
+
+      random(x) {
+        return (Math.sin(x * 12.9898) * 43758.5453) % 1;
+      }
+
+      noise2D(x, y) {
+        const i = Math.floor(x);
+        const j = Math.floor(y);
+        const fx = x - i;
+        const fy = y - j;
+        const a = this.random(i + j * 57);
+        const b = this.random(i + 1 + j * 57);
+        const c = this.random(i + (j + 1) * 57);
+        const d = this.random(i + 1 + (j + 1) * 57);
+        const ux = fx * fx * (3.0 - 2.0 * fx);
+        const uy = fy * fy * (3.0 - 2.0 * fy);
+        return a * (1 - ux) * (1 - uy) + b * ux * (1 - uy) + c * (1 - ux) * uy + d * ux * uy;
+      }
+
+      octavedNoise(x, octaves, lacunarity, gain, baseAmplitude, baseFrequency, time = 0, seed = 0, baseFlatness = 1.0) {
+        let y = 0;
+        let amplitude = baseAmplitude;
+        let frequency = baseFrequency;
+        for (let i = 0; i < octaves; i++) {
+          let octaveAmplitude = amplitude;
+          if (i === 0) octaveAmplitude *= baseFlatness;
+          y += octaveAmplitude * this.noise2D(frequency * x + seed * 100, time * frequency * 0.3);
+          frequency *= lacunarity;
+          amplitude *= gain;
+        }
+        return y;
+      }
+
+      getRoundedRectPoint(t, left, top, width, height, radius) {
+        const straightWidth = width - 2 * radius;
+        const straightHeight = height - 2 * radius;
+        const cornerArc = (Math.PI * radius) / 2;
+        const totalPerimeter = 2 * straightWidth + 2 * straightHeight + 4 * cornerArc;
+        const distance = t * totalPerimeter;
+        let accumulated = 0;
+
+        if (distance <= accumulated + straightWidth) {
+          const progress = (distance - accumulated) / straightWidth;
+          return { x: left + radius + progress * straightWidth, y: top };
+        }
+        accumulated += straightWidth;
+
+        if (distance <= accumulated + cornerArc) {
+          const progress = (distance - accumulated) / cornerArc;
+          return this.getCornerPoint(left + width - radius, top + radius, radius, -Math.PI / 2, Math.PI / 2, progress);
+        }
+        accumulated += cornerArc;
+
+        if (distance <= accumulated + straightHeight) {
+          const progress = (distance - accumulated) / straightHeight;
+          return { x: left + width, y: top + radius + progress * straightHeight };
+        }
+        accumulated += straightHeight;
+
+        if (distance <= accumulated + cornerArc) {
+          const progress = (distance - accumulated) / cornerArc;
+          return this.getCornerPoint(left + width - radius, top + height - radius, radius, 0, Math.PI / 2, progress);
+        }
+        accumulated += cornerArc;
+
+        if (distance <= accumulated + straightWidth) {
+          const progress = (distance - accumulated) / straightWidth;
+          return { x: left + width - radius - progress * straightWidth, y: top + height };
+        }
+        accumulated += straightWidth;
+
+        if (distance <= accumulated + cornerArc) {
+          const progress = (distance - accumulated) / cornerArc;
+          return this.getCornerPoint(left + radius, top + height - radius, radius, Math.PI / 2, Math.PI / 2, progress);
+        }
+        accumulated += cornerArc;
+
+        if (distance <= accumulated + straightHeight) {
+          const progress = (distance - accumulated) / straightHeight;
+          return { x: left, y: top + height - radius - progress * straightHeight };
+        }
+        accumulated += straightHeight;
+
+        const progress = (distance - accumulated) / cornerArc;
+        return this.getCornerPoint(left + radius, top + radius, radius, Math.PI, Math.PI / 2, progress);
+      }
+
+      getCornerPoint(centerX, centerY, radius, startAngle, arcLength, progress) {
+        const angle = startAngle + progress * arcLength;
+        return { x: centerX + radius * Math.cos(angle), y: centerY + radius * Math.sin(angle) };
+      }
+
+      drawElectricBorder(currentTime = 0) {
+        if (!this.canvas || !this.ctx) return;
+        const deltaTime = (currentTime - this.lastFrameTime) / 1000;
+        this.time += deltaTime * this.speed;
+        this.lastFrameTime = currentTime;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.strokeStyle = this.color;
+        this.ctx.lineWidth = this.lineWidth;
+        this.ctx.lineCap = "round";
+        this.ctx.lineJoin = "round";
+        const scale = this.displacement;
+        const left = this.borderOffset;
+        const top = this.borderOffset;
+        const borderWidth = this.canvas.width - 2 * this.borderOffset;
+        const borderHeight = this.canvas.height - 2 * this.borderOffset;
+        const maxRadius = Math.min(borderWidth, borderHeight) / 2;
+        const radius = Math.min(this.borderRadius, maxRadius);
+        const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
+        const sampleCount = Math.floor(approximatePerimeter / 2);
+        this.ctx.beginPath();
+        for (let i = 0; i <= sampleCount; i++) {
+          const progress = i / sampleCount;
+          const point = this.getRoundedRectPoint(progress, left, top, borderWidth, borderHeight, radius);
+          const xNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 0, this.baseFlatness);
+          const yNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 1, this.baseFlatness);
+          const displacedX = point.x + xNoise * scale;
+          const displacedY = point.y + yNoise * scale;
+          if (i === 0) {
+            this.ctx.moveTo(displacedX, displacedY);
+          } else {
+            this.ctx.lineTo(displacedX, displacedY);
+          }
+        }
+        this.ctx.closePath();
+        this.ctx.stroke();
+        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
+      }
+
+      start() {
+        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
+      }
+
+      stop() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+          this.animationId = null;
+        }
+      }
+
+      resize(width, height) {
+        this.width = width;
+        this.height = height;
+        this.canvas.width = width;
+        this.canvas.height = height;
+      }
+    }
+
+    // Initialize electric border cards
+    function initializeCards() {
+      const cards = document.querySelectorAll('.card-container');
+      cards.forEach((card, index) => {
+        const canvas = card.querySelector('.electric-border-canvas');
+        if (!canvas) return;
+
+        const cardRect = card.getBoundingClientRect();
+        const contentHeight = cardRect.height;
+        const contentWidth = cardRect.width;
+        const canvasWidth = contentWidth + 120;
+        const canvasHeight = contentHeight + 120;
+
+        canvas.style.width = canvasWidth + 'px';
+        canvas.style.height = canvasHeight + 'px';
+
+        const border = new ElectricBorder(`electric-border-canvas-${index + 1}`, {
+          width: canvasWidth,
+          height: canvasHeight,
+          octaves: 10,
+          lacunarity: 1.6,
+          gain: 0.7,
+          amplitude: 0.075,
+          frequency: 10,
+          baseFlatness: 0,
+          displacement: 60,
+          speed: 1.5,
+          borderOffset: 60,
+          borderRadius: 24,
+          lineWidth: 1,
+          color: "#3b82f6"
+        });
+
+        electricBorders.push(border);
+      });
+    }
+
+    // Initialize on DOM load
+    if (document.readyState === 'loading') {
+      document.addEventListener("DOMContentLoaded", initializeCards);
+    } else {
+      initializeCards();
+    }
+
+    // Re-initialize on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        electricBorders.forEach(border => border.stop());
+        electricBorders = [];
+        initializeCards();
+      }, 250);
     });
   </script>
 </body>
