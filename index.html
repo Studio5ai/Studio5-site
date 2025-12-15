@@ -1380,7 +1380,7 @@
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
-        end: '+=150%',
+        end: '+=100%',
         pin: true,
         scrub: true,
         invalidateOnRefresh: true
@@ -1393,9 +1393,9 @@
         opacity: 1
       },
       {
-        scale: 25,
-        opacity: 0,
-        duration: 0.6,
+        scale: 30,
+        opacity: 1,
+        duration: 0.7,
         ease: 'power2.in'
       }
     )
@@ -1403,9 +1403,9 @@
     .to('.hero-content-container',
       {
         opacity: 1,
-        duration: 0.4
+        duration: 0.3
       },
-      '-=0.3'
+      '-=0.4'
     );
 
     // Set initial visibility
