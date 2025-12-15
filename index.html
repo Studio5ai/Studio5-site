@@ -1879,6 +1879,42 @@
         }
         this.ctx.closePath();
         this.ctx.stroke();
+
+        // Add white lightning streaks
+        const numStreaks = 8;
+        for (let s = 0; s < numStreaks; s++) {
+          const streakProgress = (s / numStreaks + this.time * 0.1) % 1;
+          const streakIntensity = Math.sin(this.time * 3 + s * 2) * 0.5 + 0.5;
+
+          if (streakIntensity > 0.6) {
+            const point = this.getRoundedRectPoint(streakProgress, left, top, borderWidth, borderHeight, radius);
+            const xNoise = this.octavedNoise(streakProgress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 0, this.baseFlatness);
+            const yNoise = this.octavedNoise(streakProgress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 1, this.baseFlatness);
+            const x = point.x + xNoise * scale;
+            const y = point.y + yNoise * scale;
+
+            // Draw lightning streak
+            this.ctx.save();
+            this.ctx.strokeStyle = `rgba(255, 255, 255, ${streakIntensity * 0.9})`;
+            this.ctx.lineWidth = 2;
+            this.ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+            this.ctx.shadowBlur = 8;
+            this.ctx.lineCap = "round";
+
+            const streakLength = 15 + Math.random() * 25;
+            const angle = Math.atan2(yNoise, xNoise) + Math.PI / 2;
+
+            this.ctx.beginPath();
+            this.ctx.moveTo(x, y);
+            this.ctx.lineTo(
+              x + Math.cos(angle) * streakLength,
+              y + Math.sin(angle) * streakLength
+            );
+            this.ctx.stroke();
+            this.ctx.restore();
+          }
+        }
+
         this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
       }
 
