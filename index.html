@@ -376,23 +376,25 @@
       to { opacity: 1; }
     }
 
-    /* Cloud Transition Section */
-    .cloud-transition {
+    /* Problem Section */
+    .section-problem {
       position: relative;
-      height: 50vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      z-index: 1;
+      padding: 10rem 2rem;
+      background: linear-gradient(180deg, transparent 0%, var(--color-bg-elevated) 20%, var(--color-bg-elevated) 80%, transparent 100%);
     }
 
     .cloud-image-container {
       position: absolute;
+      top: -15vh;
+      left: 0;
       width: 100%;
-      height: 100%;
+      height: 60vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .cloud-image {
@@ -403,17 +405,11 @@
       will-change: transform, opacity;
     }
 
-    /* Problem Section */
-    .section-problem {
-      position: relative;
-      z-index: 1;
-      padding: 10rem 2rem;
-      background: linear-gradient(180deg, transparent 0%, var(--color-bg-elevated) 20%, var(--color-bg-elevated) 80%, transparent 100%);
-    }
-
     .section-inner {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .section-label {
@@ -1092,15 +1088,13 @@
     </div>
   </section>
 
-  <!-- Cloud Gods Parallax Transition -->
-  <section class="cloud-transition">
+  <!-- Problem Section -->
+  <section class="section-problem" id="problem">
+    <!-- Cloud Gods Parallax Overlay -->
     <div class="cloud-image-container">
       <img src="Cloud Gods 1.1.png" alt="Cloud Gods" class="cloud-image">
     </div>
-  </section>
 
-  <!-- Problem Section -->
-  <section class="section-problem" id="problem">
     <div class="section-inner">
       <h2 class="problem-hero-title">Declare Independence From the Cloud Empires</h2>
       <span class="section-label">The Problem</span>
@@ -1532,13 +1526,14 @@
       }
     });
 
-    // Cloud Gods parallax transition
+    // Cloud Gods parallax overlay
     gsap.to('.cloud-image', {
-      y: 200,
+      y: 150,
+      opacity: 0,
       scrollTrigger: {
-        trigger: '.cloud-transition',
+        trigger: '.section-problem',
         start: 'top bottom',
-        end: 'bottom top',
+        end: 'center top',
         scrub: 0.5
       }
     });
