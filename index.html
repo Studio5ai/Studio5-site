@@ -396,6 +396,18 @@
       opacity: 0;
     }
 
+    .problem-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 3rem;
+      text-align: center;
+      color: var(--color-text-primary);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
     .section-title {
       font-family: var(--font-display);
       font-size: clamp(2rem, 4vw, 3.5rem);
@@ -1037,13 +1049,9 @@
     <!-- Hero Content (revealed after zoom) -->
     <div class="hero-content-container">
       <h1 class="hero-tagline">
-        <span>Declare Independence</span>
-        <span>From the Cloud Empires</span>
+        <span>The world's most powerful privately-owned, air-gapped AI supercluster.</span>
+        <span>AI completely offline—no cloud, no data ever leaves your building, full control.</span>
       </h1>
-      <p class="hero-sub">
-        The world's most powerful privately-owned, air-gapped AI supercluster.
-        AI completely offline—no cloud, no data ever leaves your building, full control.
-      </p>
       <div class="hero-cta-group">
         <a href="mailto:contact@studiofive.ai" class="btn-primary">Request Private Demo</a>
         <a href="#solution" class="btn-secondary">Learn More</a>
@@ -1058,6 +1066,7 @@
   <!-- Problem Section -->
   <section class="section-problem" id="problem">
     <div class="section-inner">
+      <h2 class="problem-hero-title">Declare Independence From the Cloud Empires</h2>
       <span class="section-label">The Problem</span>
       <h2 class="section-title">
         Amazon, Microsoft, and Google control 70% of the cloud market—and they're 
@@ -1473,6 +1482,18 @@
           scrub: 2.5
         }
       });
+    });
+
+    // Problem hero title animation
+    gsap.to('.problem-hero-title', {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: '.problem-hero-title',
+        start: 'top 85%',
+        end: 'top 20%',
+        scrub: 2.5
+      }
     });
 
     // Problem section parallax
