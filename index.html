@@ -234,8 +234,8 @@
     .hero-zoom-logo {
       width: 200px;
       opacity: 0;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
+      filter: none;
+      -webkit-filter: none;
     }
 
     /* Hero Content Container */
@@ -1394,9 +1394,9 @@
         opacity: 1
       },
       {
-        scale: 50,
+        scale: 100,
         opacity: 1,
-        duration: 0.8,
+        duration: 1,
         ease: 'power2.in'
       }
     )
@@ -1404,9 +1404,9 @@
     .to('.hero-content-container',
       {
         opacity: 1,
-        duration: 0.2
+        duration: 0.1
       },
-      '-=0.5'
+      '-=0.6'
     );
 
     // Set initial visibility
