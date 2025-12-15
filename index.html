@@ -217,6 +217,18 @@
       overflow: hidden;
     }
 
+    .hero-reveal-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      clip-path: url(#logoClipPath);
+      opacity: 0;
+    }
+
     .hero-logo {
       width: 280px;
       max-width: 60vw;
@@ -989,25 +1001,34 @@
     <a href="mailto:contact@studiofive.ai" class="nav-cta">Request Demo</a>
   </nav>
 
+  <!-- SVG Clip Path Definition -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" id="clipContainer" style="position: absolute; opacity: 0; pointer-events: none;">
+    <clipPath id="logoClipPath" clipPathUnits="objectBoundingBox">
+      <circle cx="0.5" cy="0.5" r="0.5" id="logoPath" />
+    </clipPath>
+  </svg>
+
   <!-- Hero Section -->
   <section class="hero">
-    <img src="Logo6 PNG 1.png" alt="Studio Five" class="hero-logo">
-    <h1 class="hero-tagline">
-      <span>Declare Independence</span>
-      <span>From the Cloud Empires</span>
-    </h1>
-    <p class="hero-sub">
-      The world's most powerful privately-owned, air-gapped AI supercluster. 
-      Run trillion-parameter models completely offline—no cloud, no subscriptions, 
-      no data ever leaves your building.
-    </p>
-    <div class="hero-cta-group">
-      <a href="mailto:contact@studiofive.ai" class="btn-primary">Request Private Demo</a>
-      <a href="#solution" class="btn-secondary">Learn More</a>
-    </div>
-    <div class="scroll-indicator">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+    <div class="hero-reveal-container">
+      <img src="Logo6 PNG 1.png" alt="Studio Five" class="hero-logo">
+      <h1 class="hero-tagline">
+        <span>Declare Independence</span>
+        <span>From the Cloud Empires</span>
+      </h1>
+      <p class="hero-sub">
+        The world's most powerful privately-owned, air-gapped AI supercluster.
+        Run trillion-parameter models completely offline—no cloud, no subscriptions,
+        no data ever leaves your building.
+      </p>
+      <div class="hero-cta-group">
+        <a href="mailto:contact@studiofive.ai" class="btn-primary">Request Private Demo</a>
+        <a href="#solution" class="btn-secondary">Learn More</a>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
     </div>
   </section>
 
@@ -1337,75 +1358,44 @@
       }
     });
 
-    // Hero animations - faster and more visible
-    const heroTl = gsap.timeline({ delay: 0.1 });
-    heroTl
-      .to('.hero-logo', {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        ease: 'power2.out'
-      })
-      .to('.hero-tagline', {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power2.out'
-      }, '-=0.4')
-      .to('.hero-sub', {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-      }, '-=0.3')
-      .to('.hero-cta-group', {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-      }, '-=0.2');
+    // Logo Zoom Reveal Animation
+    let heightRatio = window.innerWidth / window.innerHeight;
 
-    // Enhanced Hero Parallax - keeps content visible longer
-    gsap.to('.hero-logo', {
-      y: 100,
-      scale: 0.9,
+    const heroRevealTl = gsap.timeline({
       scrollTrigger: {
         trigger: '.hero',
-        start: 'center top',
-        end: 'bottom top',
-        scrub: 1.5
+        start: 'top top',
+        end: '+=200%',
+        pin: true,
+        scrub: true,
+        invalidateOnRefresh: true
       }
-    });
+    })
+    .fromTo('.hero-reveal-container',
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.1 }
+    )
+    .fromTo('#logoPath',
+      {
+        attr: { r: 0.05 },
+        transformOrigin: 'center center'
+      },
+      {
+        attr: { r: 1.5 },
+        transformOrigin: 'center center',
+        duration: 1,
+        ease: 'power2.in'
+      }
+    )
+    .to({}, { duration: 0.25 });
 
-    gsap.to('.hero-tagline', {
-      y: 150,
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'center top',
-        end: 'bottom top',
-        scrub: 2
-      }
-    });
+    // Make individual hero elements visible with opacity
+    gsap.set(['.hero-logo', '.hero-tagline', '.hero-sub', '.hero-cta-group'], { opacity: 1 });
 
-    gsap.to('.hero-sub', {
-      y: 200,
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'center top',
-        end: 'bottom top',
-        scrub: 2.5
-      }
-    });
-
-    gsap.to('.hero-cta-group', {
-      y: 250,
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'center top',
-        end: 'bottom top',
-        scrub: 3
-      }
+    // Update height ratio on resize
+    window.addEventListener('resize', () => {
+      const { innerWidth, innerHeight } = window;
+      heightRatio = innerWidth / innerHeight;
     });
 
     // Starfield parallax
