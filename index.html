@@ -376,6 +376,33 @@
       to { opacity: 1; }
     }
 
+    /* Cloud Transition Section */
+    .cloud-transition {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cloud-image-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cloud-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      will-change: transform, opacity;
+    }
+
     /* Problem Section */
     .section-problem {
       position: relative;
@@ -1065,6 +1092,13 @@
     </div>
   </section>
 
+  <!-- Cloud Gods Parallax Transition -->
+  <section class="cloud-transition">
+    <div class="cloud-image-container">
+      <img src="Cloud Gods 1.1.png" alt="Cloud Gods" class="cloud-image">
+    </div>
+  </section>
+
   <!-- Problem Section -->
   <section class="section-problem" id="problem">
     <div class="section-inner">
@@ -1495,6 +1529,18 @@
         start: 'top 85%',
         end: 'top 20%',
         scrub: 2.5
+      }
+    });
+
+    // Cloud Gods parallax transition
+    gsap.to('.cloud-image', {
+      scale: 1.3,
+      y: 200,
+      scrollTrigger: {
+        trigger: '.cloud-transition',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.5
       }
     });
 
