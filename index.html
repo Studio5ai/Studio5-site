@@ -1380,7 +1380,7 @@
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
-        end: '+=200%',
+        end: '+=150%',
         pin: true,
         scrub: true,
         invalidateOnRefresh: true
@@ -1393,9 +1393,9 @@
         opacity: 1
       },
       {
-        scale: 15,
-        opacity: 0.3,
-        duration: 0.7,
+        scale: 25,
+        opacity: 0,
+        duration: 0.6,
         ease: 'power2.in'
       }
     )
@@ -1403,11 +1403,10 @@
     .to('.hero-content-container',
       {
         opacity: 1,
-        duration: 0.3
+        duration: 0.4
       },
-      '-=0.2'
-    )
-    .to({}, { duration: 0.25 });
+      '-=0.3'
+    );
 
     // Set initial visibility
     gsap.set(['.hero-logo', '.hero-tagline', '.hero-sub', '.hero-cta-group'], { opacity: 1 });
