@@ -233,8 +233,9 @@
 
     .hero-zoom-logo {
       width: 200px;
-      filter: drop-shadow(0 0 40px rgba(255,255,255,0.3));
       opacity: 0;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
     }
 
     /* Hero Content Container */
@@ -1393,9 +1394,9 @@
         opacity: 1
       },
       {
-        scale: 30,
+        scale: 50,
         opacity: 1,
-        duration: 0.7,
+        duration: 0.8,
         ease: 'power2.in'
       }
     )
@@ -1403,9 +1404,9 @@
     .to('.hero-content-container',
       {
         opacity: 1,
-        duration: 0.3
+        duration: 0.2
       },
-      '-=0.4'
+      '-=0.5'
     );
 
     // Set initial visibility
