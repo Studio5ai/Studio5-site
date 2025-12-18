@@ -644,6 +644,7 @@
       font-family: var(--font-display);
       font-size: clamp(2rem, 4vw, 3.5rem);
       font-weight: 400;
+      margin-top: clamp(2rem, 4vw, 3.5rem);
       margin-bottom: 1.5rem;
       opacity: 0;
       transform: translateY(30px);
@@ -670,7 +671,7 @@
     footer {
       position: relative;
       z-index: 1;
-      padding: 4rem 2rem;
+      padding: 2rem 2rem;
       border-top: 1px solid var(--color-border);
       text-align: center;
     }
@@ -679,12 +680,13 @@
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
+      gap: 1.5rem;
     }
 
     .footer-logo {
-      height: 128px;
+      height: 96px;
       opacity: 0.6;
       transition: opacity 0.3s ease;
     }
