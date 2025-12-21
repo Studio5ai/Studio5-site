@@ -1835,7 +1835,6 @@
         this.lastFrameTime = 0;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        this.start();
       }
 
       random(x) {
@@ -1976,6 +1975,7 @@
           cancelAnimationFrame(this.animationId);
           this.animationId = null;
         }
+        this.ctx.clearRect(0, 0, this.width, this.height);
       }
 
       resize(width, height) {
@@ -2020,6 +2020,15 @@
         });
 
         electricBorders.push(border);
+
+        // Add hover event listeners
+        card.addEventListener('mouseenter', () => {
+          border.start();
+        });
+
+        card.addEventListener('mouseleave', () => {
+          border.stop();
+        });
       });
     }
 
