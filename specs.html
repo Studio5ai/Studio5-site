@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Five – Technical Specifications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --color-bg: #000000;
+      --color-bg-elevated: #0a0a0a;
+      --color-surface: #111111;
+      --color-border: #1a1a1a;
+      --color-text: #ffffff;
+      --color-text-muted: #888888;
+      --color-text-dim: #555555;
+      --color-accent: #3b82f6;
+      --color-accent-glow: rgba(59, 130, 246, 0.3);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Starfield Background */
+    .starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stars, .stars2, .stars3 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+
+    .stars {
+      box-shadow: 1920px 1280px #FFF, 640px 1792px #FFF, 1408px 512px #FFF, 256px 896px #FFF, 1664px 1536px #FFF, 896px 1024px #FFF, 384px 1408px #FFF, 1152px 256px #FFF, 1536px 768px #FFF, 512px 1664px #FFF, 1280px 384px #FFF, 768px 1152px #FFF, 128px 1920px #FFF, 1792px 640px #FFF, 1024px 1408px #FFF, 256px 256px #FFF, 1664px 1024px #FFF, 896px 1792px #FFF, 384px 512px #FFF, 1152px 1280px #FFF, 1536px 128px #FFF, 512px 896px #FFF, 1280px 1664px #FFF, 768px 384px #FFF, 128px 1152px #FFF, 1792px 1536px #FFF, 1024px 768px #FFF, 640px 128px #FFF, 1408px 1920px #FFF, 896px 640px #FFF, 384px 1280px #FFF, 1152px 1024px #FFF, 1536px 1792px #FFF, 512px 256px #FFF, 1280px 1408px #FFF, 768px 1664px #FFF, 128px 896px #FFF, 1792px 384px #FFF, 1024px 1152px #FFF, 640px 1536px #FFF, 1408px 768px #FFF, 256px 128px #FFF, 1664px 1920px #FFF, 896px 512px #FFF, 384px 1024px #FFF, 1152px 1792px #FFF, 1536px 640px #FFF, 512px 1408px #FFF, 1280px 256px #FFF, 768px 1280px #FFF;
+      width: 1px;
+      height: 1px;
+      animation: drift 150s linear infinite;
+    }
+
+    .stars2 {
+      box-shadow: 1024px 768px #FFF, 1536px 1280px #FFF, 512px 1792px #FFF, 1792px 256px #FFF, 256px 1024px #FFF, 1280px 1536px #FFF, 768px 512px #FFF, 1920px 1408px #FFF, 640px 896px #FFF, 1408px 128px #FFF, 384px 1664px #FFF, 1152px 1152px #FFF, 896px 384px #FFF, 1664px 1920px #FFF, 128px 640px #FFF, 1536px 896px #FFF, 512px 1280px #FFF, 1280px 1792px #FFF, 768px 256px #FFF, 1920px 1024px #FFF, 640px 1536px #FFF, 1408px 768px #FFF, 384px 128px #FFF, 1152px 1408px #FFF, 896px 1664px #FFF, 1664px 512px #FFF, 128px 1152px #FFF, 1536px 384px #FFF, 512px 896px #FFF, 1280px 1280px #FFF, 768px 1920px #FFF, 1024px 640px #FFF, 256px 1408px #FFF, 1792px 1152px #FFF, 640px 256px #FFF, 1408px 1536px #FFF, 384px 1024px #FFF, 1152px 768px #FFF, 896px 128px #FFF, 1664px 1792px #FFF, 128px 512px #FFF, 1536px 1280px #FFF, 512px 640px #FFF, 1280px 384px #FFF, 768px 1664px #FFF, 1920px 896px #FFF, 1024px 1408px #FFF, 256px 1152px #FFF, 1792px 768px #FFF, 640px 1920px #FFF;
+      width: 2px;
+      height: 2px;
+      animation: drift 200s linear infinite;
+    }
+
+    .stars3 {
+      box-shadow: 1408px 1152px #FFF, 896px 384px #FFF, 1664px 1920px #FFF, 128px 640px #FFF, 1536px 896px #FFF, 512px 1280px #FFF, 1280px 1792px #FFF, 768px 256px #FFF, 1920px 1024px #FFF, 640px 1536px #FFF, 1408px 768px #FFF, 384px 128px #FFF, 1152px 1408px #FFF, 896px 1664px #FFF, 1664px 512px #FFF, 128px 1152px #FFF, 1536px 384px #FFF, 512px 896px #FFF, 1280px 1280px #FFF, 768px 1920px #FFF, 1024px 640px #FFF, 256px 1408px #FFF, 1792px 1152px #FFF, 640px 256px #FFF, 1408px 1536px #FFF, 384px 1024px #FFF, 1152px 768px #FFF, 896px 128px #FFF, 1664px 1792px #FFF, 128px 512px #FFF;
+      width: 3px;
+      height: 3px;
+      animation: drift 300s linear infinite;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(-2560px, -2560px);
+      }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(0, 0, 0, 0.8);
+      border-bottom-color: var(--color-border);
+    }
+
+    .nav-logo {
+      height: 80px;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.7;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: var(--color-text);
+      text-decoration: none;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #000;
+    }
+
+    /* Specs Section */
+    .section-specs {
+      position: relative;
+      z-index: 1;
+      padding: 12rem 2rem 8rem;
+      background: var(--color-bg-elevated);
+    }
+
+    .section-inner {
+      max-width: 3515px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: block;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 4rem;
+      letter-spacing: -0.02em;
+    }
+
+    .specs-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.5rem;
+      max-width: 3515px;
+      margin: 0 auto;
+    }
+
+    .card-container {
+      position: relative;
+      background: transparent;
+      border-radius: 24px;
+      padding: 0;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .card-container:nth-child(1),
+    .card-container:nth-child(2),
+    .card-container:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    .card-container:nth-child(4),
+    .card-container:nth-child(5) {
+      grid-column: span 3;
+    }
+
+    .inner-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      overflow: visible;
+    }
+
+    .electric-border-canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glow-layer-1,
+    .glow-layer-2 {
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+    }
+
+    .glow-layer-1 {
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      filter: blur(8px);
+    }
+
+    .glow-layer-2 {
+      border: 2px solid rgba(59, 130, 246, 0.2);
+      filter: blur(16px);
+    }
+
+    .card-container:hover .glow-layer-1,
+    .card-container:hover .glow-layer-2 {
+      opacity: 1;
+    }
+
+    .overlay-1,
+    .overlay-2 {
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 0;
+    }
+
+    .overlay-1 {
+      background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08), transparent 70%);
+    }
+
+    .overlay-2 {
+      background: radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.05), transparent 70%);
+    }
+
+    .background-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 60%);
+      filter: blur(40px);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: -1;
+    }
+
+    .card-container:hover .background-glow {
+      opacity: 1;
+    }
+
+    .content-container {
+      position: relative;
+      z-index: 3;
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      background: var(--color-surface);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 100%;
+    }
+
+    .spec-section-title {
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-item {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--color-text-muted);
+      margin-bottom: 0.75rem;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .spec-item::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .spec-sub {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--color-text-dim);
+      margin-top: 0.375rem;
+      padding-left: 2.5rem;
+      position: relative;
+    }
+
+    .spec-sub::before {
+      content: '→';
+      position: absolute;
+      left: 1.25rem;
+      color: var(--color-text-dim);
+      opacity: 0.5;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      height: 80px;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-logo:hover {
+      opacity: 1;
+    }
+
+    .footer-text {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1400px) {
+      .specs-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .card-container:nth-child(1),
+      .card-container:nth-child(2),
+      .card-container:nth-child(3) {
+        grid-column: span 2;
+      }
+
+      .card-container:nth-child(4),
+      .card-container:nth-child(5) {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 968px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-logo {
+        height: 60px;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+
+      .nav-cta {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+      }
+
+      .section-title {
+        font-size: 3rem;
+      }
+
+      .specs-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card-container:nth-child(1),
+      .card-container:nth-child(2),
+      .card-container:nth-child(3),
+      .card-container:nth-child(4),
+      .card-container:nth-child(5) {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .section-specs {
+        padding: 10rem 1.5rem 6rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+
+      .specs-container {
+        grid-template-columns: 1fr;
+      }
+
+      .card-container:nth-child(1),
+      .card-container:nth-child(2),
+      .card-container:nth-child(3),
+      .card-container:nth-child(4),
+      .card-container:nth-child(5) {
+        grid-column: span 1;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="starfield">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <nav>
+    <a href="index.html"><img src="Studio5 SVG.svg" alt="Studio Five" class="nav-logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#problem">The Problem</a></li>
+      <li><a href="index.html#solution">Solution</a></li>
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="specs.html">Specs</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:contact@studiofive.ai" class="nav-cta">Request Demo</a>
+  </nav>
+
+  <section class="section-specs" id="specs">
+    <div class="section-inner">
+      <span class="section-label">Technical Specifications</span>
+      <h1 class="section-title">Built Different</h1>
+      <div class="specs-container">
+        <div class="card-container">
+          <div class="inner-container">
+            <canvas class="electric-border-canvas" id="electric-border-canvas-1"></canvas>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+            <div class="overlay-1"></div>
+            <div class="overlay-2"></div>
+            <div class="background-glow"></div>
+            <div class="content-container">
+              <h3 class="spec-section-title">Compute Layer</h3>
+              <div class="spec-item">160 CPU Cores
+                <div class="spec-sub">2x AMD EPYC 9374F (32C/64T each)</div>
+                <div class="spec-sub">Zen 4 Architecture @ 3.85 GHz</div>
+              </div>
+              <div class="spec-item">2.5TB DDR5 ECC Memory
+                <div class="spec-sub">4800 MT/s</div>
+                <div class="spec-sub">12-channel per socket</div>
+              </div>
+              <div class="spec-item">Dual 200GbE RDMA NICs
+                <div class="spec-sub">4TB/s aggregate cluster bandwidth</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-container">
+          <div class="inner-container">
+            <canvas class="electric-border-canvas" id="electric-border-canvas-2"></canvas>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+            <div class="overlay-1"></div>
+            <div class="overlay-2"></div>
+            <div class="background-glow"></div>
+            <div class="content-container">
+              <h3 class="spec-section-title">Storage Layer</h3>
+              <div class="spec-item">480TB NVMe Capacity
+                <div class="spec-sub">24x 20TB Samsung PM9A3</div>
+                <div class="spec-sub">PCIe Gen4 x4 per drive</div>
+              </div>
+              <div class="spec-item">36 GB/s Read Throughput
+                <div class="spec-sub">16 GB/s sustained write</div>
+              </div>
+              <div class="spec-item">20M IOPS Random Access
+                <div class="spec-sub">Dual AMD Rome controllers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-container">
+          <div class="inner-container">
+            <canvas class="electric-border-canvas" id="electric-border-canvas-3"></canvas>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+            <div class="overlay-1"></div>
+            <div class="overlay-2"></div>
+            <div class="background-glow"></div>
+            <div class="content-container">
+              <h3 class="spec-section-title">Performance</h3>
+              <div class="spec-item">117 TFLOPS FP64 Compute
+                <div class="spec-sub">256-bit AVX-512 vectors</div>
+                <div class="spec-sub">Dual 6 GHz infinity fabric</div>
+              </div>
+              <div class="spec-item">Inference Speed
+                <div class="spec-sub">750–980 tokens/sec (Qwen2.5 72B)</div>
+                <div class="spec-sub">150–220 tokens/sec (Llama 3.3 70B)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-container">
+          <div class="inner-container">
+            <canvas class="electric-border-canvas" id="electric-border-canvas-4"></canvas>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+            <div class="overlay-1"></div>
+            <div class="overlay-2"></div>
+            <div class="background-glow"></div>
+            <div class="content-container">
+              <h3 class="spec-section-title">Physical & Power</h3>
+              <div class="spec-item">≤950W System Power
+                <div class="spec-sub">Dual 2000W 80+ Titanium PSUs</div>
+                <div class="spec-sub">2N+1 redundant power topology</div>
+              </div>
+              <div class="spec-item">Acoustic Output
+                <div class="spec-sub">41-44 dBA @ 22°C ambient</div>
+              </div>
+              <div class="spec-item">Form Factor: 5U Rackmount
+                <div class="spec-sub">Fits standard 19" racks</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-container">
+          <div class="inner-container">
+            <canvas class="electric-border-canvas" id="electric-border-canvas-5"></canvas>
+            <div class="glow-layer-1"></div>
+            <div class="glow-layer-2"></div>
+            <div class="overlay-1"></div>
+            <div class="overlay-2"></div>
+            <div class="background-glow"></div>
+            <div class="content-container">
+              <h3 class="spec-section-title">Software & Security</h3>
+              <div class="spec-item">ForgeOS Bare-Metal Runtime
+                <div class="spec-sub">Verified boot chain</div>
+                <div class="spec-sub">Zero-trust network stack</div>
+              </div>
+              <div class="spec-item">Hardware Security
+                <div class="spec-sub">AMD SEV-SNP encryption</div>
+                <div class="spec-sub">FIPS 140-3 Level 2 cryptography</div>
+              </div>
+              <div class="spec-item">Compliance Ready
+                <div class="spec-sub">HIPAA / ITAR / SOC 2 Type II</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <img src="Studio5 SVG.svg" alt="Studio Five" class="footer-logo">
+      <p class="footer-text">© 2025 Studio Five · Nashville</p>
+      <ul class="footer-links">
+        <li><a href="mailto:contact@studiofive.ai">Contact</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Navigation scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Starfield parallax
+    gsap.to('.stars', {
+      y: -400,
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1
+      }
+    });
+
+    gsap.to('.stars2', {
+      y: -600,
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5
+      }
+    });
+
+    gsap.to('.stars3', {
+      y: -800,
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 2
+      }
+    });
+
+    // Specs section parallax
+    gsap.to('.section-specs', {
+      y: -100,
+      scrollTrigger: {
+        trigger: '.section-specs',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 3
+      }
+    });
+
+    // Specs cards animation
+    gsap.utils.toArray('.card-container').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // Individual card parallax
+      gsap.to(card, {
+        y: -60 - (i % 5) * 10,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 2 + (i % 5) * 0.2
+        }
+      });
+    });
+
+    // Electric Border Animation Class
+    let electricBorders = [];
+
+    class ElectricBorder {
+      constructor(canvasId, options = {}) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) return;
+
+        this.ctx = this.canvas.getContext("2d");
+        this.width = options.width || 354;
+        this.height = options.height || 504;
+        this.octaves = options.octaves || 10;
+        this.lacunarity = options.lacunarity || 1.6;
+        this.gain = options.gain || 0.6;
+        this.amplitude = options.amplitude || 0.2;
+        this.frequency = options.frequency || 5;
+        this.baseFlatness = options.baseFlatness || 0.2;
+        this.displacement = options.displacement || 60;
+        this.speed = options.speed || 1;
+        this.borderOffset = options.borderOffset || 60;
+        this.borderRadius = options.borderRadius || 40;
+        this.lineWidth = options.lineWidth || 1;
+        this.color = options.color || "#3b82f6";
+        this.animationId = null;
+        this.time = 0;
+        this.lastFrameTime = 0;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+      }
+
+      random(x) {
+        return (Math.sin(x * 12.9898) * 43758.5453) % 1;
+      }
+
+      noise2D(x, y) {
+        const i = Math.floor(x);
+        const j = Math.floor(y);
+        const fx = x - i;
+        const fy = y - j;
+        const a = this.random(i + j * 57);
+        const b = this.random(i + 1 + j * 57);
+        const c = this.random(i + (j + 1) * 57);
+        const d = this.random(i + 1 + (j + 1) * 57);
+        const ux = fx * fx * (3.0 - 2.0 * fx);
+        const uy = fy * fy * (3.0 - 2.0 * fy);
+        return a * (1 - ux) * (1 - uy) + b * ux * (1 - uy) + c * (1 - ux) * uy + d * ux * uy;
+      }
+
+      octavedNoise(x, octaves, lacunarity, gain, baseAmplitude, baseFrequency, time = 0, seed = 0, baseFlatness = 1.0) {
+        let y = 0;
+        let amplitude = baseAmplitude;
+        let frequency = baseFrequency;
+        for (let i = 0; i < octaves; i++) {
+          let octaveAmplitude = amplitude;
+          if (i === 0) octaveAmplitude *= baseFlatness;
+          y += octaveAmplitude * this.noise2D(frequency * x + seed * 100, time * frequency * 0.3);
+          frequency *= lacunarity;
+          amplitude *= gain;
+        }
+        return y;
+      }
+
+      getRoundedRectPoint(t, left, top, width, height, radius) {
+        const straightWidth = width - 2 * radius;
+        const straightHeight = height - 2 * radius;
+        const cornerArc = (Math.PI * radius) / 2;
+        const totalPerimeter = 2 * straightWidth + 2 * straightHeight + 4 * cornerArc;
+        const distance = t * totalPerimeter;
+        let accumulated = 0;
+
+        if (distance <= accumulated + straightWidth) {
+          const progress = (distance - accumulated) / straightWidth;
+          return { x: left + radius + progress * straightWidth, y: top };
+        }
+        accumulated += straightWidth;
+
+        if (distance <= accumulated + cornerArc) {
+          const progress = (distance - accumulated) / cornerArc;
+          return this.getCornerPoint(left + width - radius, top + radius, radius, -Math.PI / 2, Math.PI / 2, progress);
+        }
+        accumulated += cornerArc;
+
+        if (distance <= accumulated + straightHeight) {
+          const progress = (distance - accumulated) / straightHeight;
+          return { x: left + width, y: top + radius + progress * straightHeight };
+        }
+        accumulated += straightHeight;
+
+        if (distance <= accumulated + cornerArc) {
+          const progress = (distance - accumulated) / cornerArc;
+          return this.getCornerPoint(left + width - radius, top + height - radius, radius, 0, Math.PI / 2, progress);
+        }
+        accumulated += cornerArc;
+
+        if (distance <= accumulated + straightWidth) {
+          const progress = (distance - accumulated) / straightWidth;
+          return { x: left + width - radius - progress * straightWidth, y: top + height };
+        }
+        accumulated += straightWidth;
+
+        if (distance <= accumulated + cornerArc) {
+          const progress = (distance - accumulated) / cornerArc;
+          return this.getCornerPoint(left + radius, top + height - radius, radius, Math.PI / 2, Math.PI / 2, progress);
+        }
+        accumulated += cornerArc;
+
+        if (distance <= accumulated + straightHeight) {
+          const progress = (distance - accumulated) / straightHeight;
+          return { x: left, y: top + height - radius - progress * straightHeight };
+        }
+        accumulated += straightHeight;
+
+        const progress = (distance - accumulated) / cornerArc;
+        return this.getCornerPoint(left + radius, top + radius, radius, Math.PI, Math.PI / 2, progress);
+      }
+
+      getCornerPoint(centerX, centerY, radius, startAngle, arcLength, progress) {
+        const angle = startAngle + progress * arcLength;
+        return { x: centerX + radius * Math.cos(angle), y: centerY + radius * Math.sin(angle) };
+      }
+
+      drawElectricBorder(currentTime = 0) {
+        if (!this.canvas || !this.ctx) return;
+        const deltaTime = (currentTime - this.lastFrameTime) / 1000;
+        this.time += deltaTime * this.speed;
+        this.lastFrameTime = currentTime;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.strokeStyle = this.color;
+        this.ctx.lineWidth = this.lineWidth;
+        this.ctx.lineCap = "round";
+        this.ctx.lineJoin = "round";
+        const scale = this.displacement;
+        const left = this.borderOffset;
+        const top = this.borderOffset;
+        const borderWidth = this.canvas.width - 2 * this.borderOffset;
+        const borderHeight = this.canvas.height - 2 * this.borderOffset;
+        const maxRadius = Math.min(borderWidth, borderHeight) / 2;
+        const radius = Math.min(this.borderRadius, maxRadius);
+        const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
+        const sampleCount = Math.floor(approximatePerimeter / 2);
+        this.ctx.beginPath();
+        for (let i = 0; i <= sampleCount; i++) {
+          const progress = i / sampleCount;
+          const point = this.getRoundedRectPoint(progress, left, top, borderWidth, borderHeight, radius);
+          const xNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 0, this.baseFlatness);
+          const yNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 1, this.baseFlatness);
+          const displacedX = point.x + xNoise * scale;
+          const displacedY = point.y + yNoise * scale;
+          if (i === 0) {
+            this.ctx.moveTo(displacedX, displacedY);
+          } else {
+            this.ctx.lineTo(displacedX, displacedY);
+          }
+        }
+        this.ctx.closePath();
+        this.ctx.stroke();
+        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
+      }
+
+      start() {
+        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
+      }
+
+      stop() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+          this.animationId = null;
+        }
+        this.ctx.clearRect(0, 0, this.width, this.height);
+      }
+
+      resize(width, height) {
+        this.width = width;
+        this.height = height;
+        this.canvas.width = width;
+        this.canvas.height = height;
+      }
+    }
+
+    // Initialize electric border cards
+    function initializeCards() {
+      const cards = document.querySelectorAll('.card-container');
+      cards.forEach((card, index) => {
+        const canvas = card.querySelector('.electric-border-canvas');
+        if (!canvas) return;
+
+        const cardRect = card.getBoundingClientRect();
+        const contentHeight = cardRect.height;
+        const contentWidth = cardRect.width;
+        const canvasWidth = contentWidth + 120;
+        const canvasHeight = contentHeight + 120;
+
+        canvas.style.width = canvasWidth + 'px';
+        canvas.style.height = canvasHeight + 'px';
+
+        const border = new ElectricBorder(`electric-border-canvas-${index + 1}`, {
+          width: canvasWidth,
+          height: canvasHeight,
+          octaves: 10,
+          lacunarity: 1.6,
+          gain: 0.7,
+          amplitude: 0.075,
+          frequency: 10,
+          baseFlatness: 0,
+          displacement: 60,
+          speed: 1.5,
+          borderOffset: 60,
+          borderRadius: 24,
+          lineWidth: 1,
+          color: "#3b82f6"
+        });
+
+        electricBorders.push(border);
+
+        // Add hover event listeners
+        card.addEventListener('mouseenter', () => {
+          border.start();
+        });
+
+        card.addEventListener('mouseleave', () => {
+          border.stop();
+        });
+      });
+    }
+
+    // Initialize on DOM load
+    if (document.readyState === 'loading') {
+      document.addEventListener("DOMContentLoaded", initializeCards);
+    } else {
+      initializeCards();
+    }
+
+    // Re-initialize on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        electricBorders.forEach(border => border.stop());
+        electricBorders = [];
+        initializeCards();
+      }, 250);
+    });
+  </script>
+</body>
+</html>
