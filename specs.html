@@ -22,10 +22,9 @@
       --color-accent-glow: rgba(59, 130, 246, 0.3);
       --font-display: 'Playfair Display', Georgia, serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
     }
 
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -42,7 +41,6 @@
       line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     /* Starfield Background */
@@ -60,41 +58,63 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      right: 0;
+      bottom: 0;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
       background: transparent;
     }
 
     .stars {
-      box-shadow: 1920px 1280px #FFF, 640px 1792px #FFF, 1408px 512px #FFF, 256px 896px #FFF, 1664px 1536px #FFF, 896px 1024px #FFF, 384px 1408px #FFF, 1152px 256px #FFF, 1536px 768px #FFF, 512px 1664px #FFF, 1280px 384px #FFF, 768px 1152px #FFF, 128px 1920px #FFF, 1792px 640px #FFF, 1024px 1408px #FFF, 256px 256px #FFF, 1664px 1024px #FFF, 896px 1792px #FFF, 384px 512px #FFF, 1152px 1280px #FFF, 1536px 128px #FFF, 512px 896px #FFF, 1280px 1664px #FFF, 768px 384px #FFF, 128px 1152px #FFF, 1792px 1536px #FFF, 1024px 768px #FFF, 640px 128px #FFF, 1408px 1920px #FFF, 896px 640px #FFF, 384px 1280px #FFF, 1152px 1024px #FFF, 1536px 1792px #FFF, 512px 256px #FFF, 1280px 1408px #FFF, 768px 1664px #FFF, 128px 896px #FFF, 1792px 384px #FFF, 1024px 1152px #FFF, 640px 1536px #FFF, 1408px 768px #FFF, 256px 128px #FFF, 1664px 1920px #FFF, 896px 512px #FFF, 384px 1024px #FFF, 1152px 1792px #FFF, 1536px 640px #FFF, 512px 1408px #FFF, 1280px 256px #FFF, 768px 1280px #FFF;
-      width: 1px;
-      height: 1px;
-      animation: drift 150s linear infinite;
-    }
-
-    .stars2 {
-      box-shadow: 1024px 768px #FFF, 1536px 1280px #FFF, 512px 1792px #FFF, 1792px 256px #FFF, 256px 1024px #FFF, 1280px 1536px #FFF, 768px 512px #FFF, 1920px 1408px #FFF, 640px 896px #FFF, 1408px 128px #FFF, 384px 1664px #FFF, 1152px 1152px #FFF, 896px 384px #FFF, 1664px 1920px #FFF, 128px 640px #FFF, 1536px 896px #FFF, 512px 1280px #FFF, 1280px 1792px #FFF, 768px 256px #FFF, 1920px 1024px #FFF, 640px 1536px #FFF, 1408px 768px #FFF, 384px 128px #FFF, 1152px 1408px #FFF, 896px 1664px #FFF, 1664px 512px #FFF, 128px 1152px #FFF, 1536px 384px #FFF, 512px 896px #FFF, 1280px 1280px #FFF, 768px 1920px #FFF, 1024px 640px #FFF, 256px 1408px #FFF, 1792px 1152px #FFF, 640px 256px #FFF, 1408px 1536px #FFF, 384px 1024px #FFF, 1152px 768px #FFF, 896px 128px #FFF, 1664px 1792px #FFF, 128px 512px #FFF, 1536px 1280px #FFF, 512px 640px #FFF, 1280px 384px #FFF, 768px 1664px #FFF, 1920px 896px #FFF, 1024px 1408px #FFF, 256px 1152px #FFF, 1792px 768px #FFF, 640px 1920px #FFF;
-      width: 2px;
-      height: 2px;
+      box-shadow: 
+        1247px 391px rgba(255,255,255,0.8), 834px 1829px rgba(255,255,255,0.6), 
+        2145px 672px rgba(255,255,255,0.7), 456px 2301px rgba(255,255,255,0.5),
+        1678px 1092px rgba(255,255,255,0.9), 923px 567px rgba(255,255,255,0.4), 
+        2389px 1456px rgba(255,255,255,0.6), 234px 1789px rgba(255,255,255,0.8),
+        1523px 234px rgba(255,255,255,0.5), 2012px 1890px rgba(255,255,255,0.7), 
+        678px 1345px rgba(255,255,255,0.4), 1890px 890px rgba(255,255,255,0.6),
+        345px 2134px rgba(255,255,255,0.8), 1456px 1567px rgba(255,255,255,0.5), 
+        2234px 345px rgba(255,255,255,0.7), 789px 987px rgba(255,255,255,0.4),
+        1901px 1234px rgba(255,255,255,0.6), 567px 1876px rgba(255,255,255,0.8), 
+        2456px 678px rgba(255,255,255,0.5), 1123px 2345px rgba(255,255,255,0.7),
+        156px 456px rgba(255,255,255,0.6), 2678px 234px rgba(255,255,255,0.4),
+        890px 1567px rgba(255,255,255,0.8), 1234px 890px rgba(255,255,255,0.5),
+        2012px 1234px rgba(255,255,255,0.7), 456px 678px rgba(255,255,255,0.6),
+        1678px 2012px rgba(255,255,255,0.4), 234px 1234px rgba(255,255,255,0.8),
+        2345px 567px rgba(255,255,255,0.5), 678px 2345px rgba(255,255,255,0.7);
       animation: drift 200s linear infinite;
     }
 
-    .stars3 {
-      box-shadow: 1408px 1152px #FFF, 896px 384px #FFF, 1664px 1920px #FFF, 128px 640px #FFF, 1536px 896px #FFF, 512px 1280px #FFF, 1280px 1792px #FFF, 768px 256px #FFF, 1920px 1024px #FFF, 640px 1536px #FFF, 1408px 768px #FFF, 384px 128px #FFF, 1152px 1408px #FFF, 896px 1664px #FFF, 1664px 512px #FFF, 128px 1152px #FFF, 1536px 384px #FFF, 512px 896px #FFF, 1280px 1280px #FFF, 768px 1920px #FFF, 1024px 640px #FFF, 256px 1408px #FFF, 1792px 1152px #FFF, 640px 256px #FFF, 1408px 1536px #FFF, 384px 1024px #FFF, 1152px 768px #FFF, 896px 128px #FFF, 1664px 1792px #FFF, 128px 512px #FFF;
-      width: 3px;
-      height: 3px;
+    .stars2 {
+      width: 1px;
+      height: 1px;
+      box-shadow: 
+        512px 789px rgba(255,255,255,0.3), 1678px 234px rgba(255,255,255,0.2),
+        234px 1456px rgba(255,255,255,0.4), 2567px 890px rgba(255,255,255,0.3),
+        890px 2234px rgba(255,255,255,0.2), 1234px 567px rgba(255,255,255,0.4),
+        2012px 1789px rgba(255,255,255,0.3), 567px 345px rgba(255,255,255,0.2),
+        1890px 1123px rgba(255,255,255,0.4), 345px 2567px rgba(255,255,255,0.3),
+        2234px 456px rgba(255,255,255,0.2), 678px 1890px rgba(255,255,255,0.4),
+        1456px 2012px rgba(255,255,255,0.3), 2890px 678px rgba(255,255,255,0.2),
+        123px 1234px rgba(255,255,255,0.4), 1789px 345px rgba(255,255,255,0.3);
       animation: drift 300s linear infinite;
     }
 
-    @keyframes drift {
-      from {
-        transform: translate(0, 0);
-      }
-      to {
-        transform: translate(-2560px, -2560px);
-      }
+    .stars3 {
+      width: 3px;
+      height: 3px;
+      box-shadow: 
+        1890px 567px rgba(255,255,255,0.15), 456px 1234px rgba(255,255,255,0.1),
+        2345px 890px rgba(255,255,255,0.12), 789px 2012px rgba(255,255,255,0.08),
+        1234px 1567px rgba(255,255,255,0.15), 2678px 234px rgba(255,255,255,0.1);
+      animation: drift 150s linear infinite;
     }
 
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-2560px, -2560px); }
+    }
     /* Navigation */
     nav {
       position: fixed;
@@ -102,29 +122,30 @@
       left: 0;
       right: 0;
       z-index: 1000;
+      padding: 1.5rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 3rem;
-      background: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid transparent;
-      transition: all 0.3s ease;
+      background: rgba(0,0,0,0.5);
+      border-bottom: 1px solid var(--color-border);
+      transition: all 0.4s ease;
     }
 
     nav.scrolled {
-      background: rgba(0, 0, 0, 0.8);
-      border-bottom-color: var(--color-border);
+      padding: 1rem 3rem;
+      background: rgba(0,0,0,0.85);
     }
 
     .nav-logo {
-      height: 80px;
-      transition: opacity 0.3s ease;
+      height: 44px;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+      transition: all 0.3s ease;
     }
 
     .nav-logo:hover {
-      opacity: 0.7;
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+      transform: scale(1.02);
     }
 
     .nav-links {
@@ -134,12 +155,13 @@
     }
 
     .nav-links a {
-      color: var(--color-text);
+      color: var(--color-text-muted);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.875rem;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      transition: color 0.3s ease;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
       position: relative;
     }
 
@@ -150,8 +172,12 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: var(--color-accent);
+      background: var(--color-text);
       transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
     }
 
     .nav-links a:hover::after {
@@ -160,219 +186,21 @@
 
     .nav-cta {
       padding: 0.75rem 1.5rem;
-      background: transparent;
-      color: var(--color-text);
+      background: var(--color-text);
+      color: var(--color-bg);
       text-decoration: none;
-      border: 1px solid var(--color-border);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-weight: 500;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 4px;
       transition: all 0.3s ease;
     }
 
     .nav-cta:hover {
       background: var(--color-accent);
-      border-color: var(--color-accent);
-      color: #000;
+      color: var(--color-text);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--color-accent-glow);
     }
-
-    /* Specs Section */
-    .section-specs {
-      position: relative;
-      z-index: 1;
-      padding: 12rem 2rem 8rem;
-      background: var(--color-bg-elevated);
-    }
-
-    .section-inner {
-      max-width: 3515px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      display: block;
-      color: var(--color-accent);
-      font-size: 0.875rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      font-weight: 500;
-      line-height: 1.1;
-      margin-bottom: 4rem;
-      letter-spacing: -0.02em;
-    }
-
-    .specs-container {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 1.5rem;
-      max-width: 3515px;
-      margin: 0 auto;
-    }
-
-    .card-container {
-      position: relative;
-      background: transparent;
-      border-radius: 24px;
-      padding: 0;
-      opacity: 0;
-      transform: translateY(40px);
-    }
-
-    .card-container:nth-child(1),
-    .card-container:nth-child(2),
-    .card-container:nth-child(3) {
-      grid-column: span 2;
-    }
-
-    .card-container:nth-child(4),
-    .card-container:nth-child(5) {
-      grid-column: span 3;
-    }
-
-    .inner-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 24px;
-      overflow: visible;
-    }
-
-    .electric-border-canvas {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .glow-layer-1,
-    .glow-layer-2 {
-      position: absolute;
-      inset: -2px;
-      border-radius: 24px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 1;
-    }
-
-    .glow-layer-1 {
-      border: 2px solid rgba(59, 130, 246, 0.3);
-      filter: blur(8px);
-    }
-
-    .glow-layer-2 {
-      border: 2px solid rgba(59, 130, 246, 0.2);
-      filter: blur(16px);
-    }
-
-    .card-container:hover .glow-layer-1,
-    .card-container:hover .glow-layer-2 {
-      opacity: 1;
-    }
-
-    .overlay-1,
-    .overlay-2 {
-      position: absolute;
-      inset: 0;
-      border-radius: 24px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 0;
-    }
-
-    .overlay-1 {
-      background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08), transparent 70%);
-    }
-
-    .overlay-2 {
-      background: radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.05), transparent 70%);
-    }
-
-    .background-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120%;
-      height: 120%;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 60%);
-      filter: blur(40px);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: -1;
-    }
-
-    .card-container:hover .background-glow {
-      opacity: 1;
-    }
-
-    .content-container {
-      position: relative;
-      z-index: 3;
-      padding: 2.5rem 2rem;
-      border-radius: 24px;
-      background: var(--color-surface);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      height: 100%;
-    }
-
-    .spec-section-title {
-      font-size: 18px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-accent);
-      margin-bottom: 1.5rem;
-    }
-
-    .spec-item {
-      font-family: var(--font-mono);
-      font-size: 15px;
-      line-height: 1.9;
-      color: var(--color-text-muted);
-      margin-bottom: 0.75rem;
-      padding-left: 1.25rem;
-      position: relative;
-    }
-
-    .spec-item::before {
-      content: '›';
-      position: absolute;
-      left: 0;
-      color: var(--color-accent);
-      font-weight: 600;
-    }
-
-    .spec-sub {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--color-text-dim);
-      margin-top: 0.375rem;
-      padding-left: 2.5rem;
-      position: relative;
-    }
-
-    .spec-sub::before {
-      content: '→';
-      position: absolute;
-      left: 1.25rem;
-      color: var(--color-text-dim);
-      opacity: 0.5;
-    }
-
     /* Footer */
     footer {
       position: relative;
@@ -400,8 +228,8 @@
     }
 
     .footer-text {
-      color: var(--color-text-muted);
       font-size: 0.875rem;
+      color: var(--color-text-dim);
     }
 
     .footer-links {
@@ -420,26 +248,273 @@
     .footer-links a:hover {
       color: var(--color-text);
     }
+    /* Specs Section */
+    .section-specs {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 2rem;
+      background: var(--color-bg-elevated);
+    }
+
+    .specs-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 24px;
+      max-width: 3515px;
+      margin: 4rem auto 0;
+    }
+
+    .card-container {
+      padding: 2px;
+      border-radius: 24px;
+      position: relative;
+      width: 100%;
+      background: transparent;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    /* First 3 cards - span 2 columns each */
+    .card-container:nth-child(1),
+    .card-container:nth-child(2),
+    .card-container:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    /* Last 2 cards - span 3 columns each (centered in bottom row) */
+    .card-container:nth-child(4),
+    .card-container:nth-child(5) {
+      grid-column: span 3;
+    }
+
+    .inner-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .electric-border-canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .glow-layer-1 {
+      border: 2px solid var(--color-accent);
+      opacity: 0;
+      border-radius: 24px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(1px);
+      transition: opacity 0.3s ease;
+    }
+
+    .glow-layer-2 {
+      border: 2px solid var(--color-accent);
+      border-radius: 24px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card-container:hover .glow-layer-1 {
+      opacity: 0.5;
+    }
+
+    .card-container:hover .glow-layer-2 {
+      opacity: 0.25;
+    }
+
+    .card-container:hover .background-glow {
+      opacity: 0.125;
+    }
+
+    .overlay-1 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      opacity: 0;
+      mix-blend-mode: overlay;
+      transform: scale(1.05);
+      filter: blur(8px);
+      background: linear-gradient(
+        -30deg,
+        var(--color-accent),
+        transparent 6%,
+        transparent 94%,
+        var(--color-accent)
+      );
+    }
+
+    .overlay-2 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      opacity: 0;
+      mix-blend-mode: overlay;
+      transform: scale(1.05);
+      filter: blur(8px);
+      background: linear-gradient(
+        -30deg,
+        var(--color-accent),
+        transparent 6%,
+        transparent 94%,
+        var(--color-accent)
+      );
+    }
+
+    .background-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      filter: blur(40px);
+      transform: scale(1.05);
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      background: linear-gradient(
+        -30deg,
+        var(--color-accent),
+        transparent 6%,
+        transparent 94%,
+        var(--color-accent)
+      );
+    }
+
+    .content-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+
+    .content-inner {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 8px;
+      gap: 10px;
+    }
+
+    .spec-section-title {
+      font-family: var(--font-body);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      margin-bottom: 4px;
+    }
+
+    .spec-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .spec-item {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .spec-item::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      opacity: 0.6;
+    }
+
+    .spec-item strong,
+    .spec-item .highlight {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .spec-item .value {
+      color: var(--color-accent);
+      font-weight: 400;
+    }
+
+    .spec-sub {
+      padding-left: 20px;
+      font-size: 14px;
+      color: var(--color-text-dim);
+    }
+
+    .spec-sub::before {
+      content: '→';
+      opacity: 0.4;
+    }
 
     /* Responsive Design */
     @media (max-width: 1400px) {
       .specs-container {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .card-container:nth-child(1),
       .card-container:nth-child(2),
-      .card-container:nth-child(3) {
-        grid-column: span 2;
-      }
-
+      .card-container:nth-child(3),
       .card-container:nth-child(4),
       .card-container:nth-child(5) {
-        grid-column: span 2;
+        grid-column: span 1;
       }
     }
 
     @media (max-width: 968px) {
+      .specs-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       nav {
         padding: 1rem 1.5rem;
       }
@@ -463,18 +538,6 @@
 
       .section-title {
         font-size: 3rem;
-      }
-
-      .specs-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .card-container:nth-child(1),
-      .card-container:nth-child(2),
-      .card-container:nth-child(3),
-      .card-container:nth-child(4),
-      .card-container:nth-child(5) {
-        grid-column: span 1;
       }
     }
 
@@ -525,6 +588,7 @@
   </style>
 </head>
 <body>
+  <!-- Starfield Background -->
   <div class="starfield">
     <div class="stars"></div>
     <div class="stars2"></div>
@@ -542,135 +606,148 @@
     </ul>
     <a href="mailto:contact@studiofive.ai" class="nav-cta">Request Demo</a>
   </nav>
-
+  <!-- Specs Section -->
   <section class="section-specs" id="specs">
     <div class="section-inner">
       <span class="section-label">Technical Specifications</span>
-      <h1 class="section-title">Built Different</h1>
+      <h2 class="section-title">Built Different</h2>
+
       <div class="specs-container">
+
+        <!-- Card 1: Compute Layer -->
         <div class="card-container">
           <div class="inner-container">
-            <canvas class="electric-border-canvas" id="electric-border-canvas-1"></canvas>
+            <div class="canvas-container" id="card1-canvas-container">
+              <canvas id="electric-border-canvas-1" class="electric-border-canvas"></canvas>
+            </div>
             <div class="glow-layer-1"></div>
             <div class="glow-layer-2"></div>
-            <div class="overlay-1"></div>
-            <div class="overlay-2"></div>
-            <div class="background-glow"></div>
-            <div class="content-container">
-              <h3 class="spec-section-title">Compute Layer</h3>
-              <div class="spec-item">160 CPU Cores
-                <div class="spec-sub">2x AMD EPYC 9374F (32C/64T each)</div>
-                <div class="spec-sub">Zen 4 Architecture @ 3.85 GHz</div>
-              </div>
-              <div class="spec-item">2.5TB DDR5 ECC Memory
-                <div class="spec-sub">4800 MT/s</div>
-                <div class="spec-sub">12-channel per socket</div>
-              </div>
-              <div class="spec-item">Dual 200GbE RDMA NICs
-                <div class="spec-sub">4TB/s aggregate cluster bandwidth</div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Compute Layer</h2>
+              <div class="spec-list">
+                <p class="spec-item"><span class="value">160 ×</span> high-performance cores (AVX-512 class, <span class="highlight">4.05 GHz</span> all-core → <span class="highlight">5.4 GHz</span> peak)</p>
+                <p class="spec-item"><span class="value">400 ×</span> unified matrix/ray-tracing cores</p>
+                <p class="spec-item"><span class="value">160 ×</span> dedicated tensor accelerators (32 per node)</p>
+                <p class="spec-item"><span class="value">2.5 TB</span> pooled system memory, <span class="highlight">4 TB/s</span> bandwidth, true zero-copy across all nodes</p>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Card 2: Storage Layer -->
         <div class="card-container">
           <div class="inner-container">
-            <canvas class="electric-border-canvas" id="electric-border-canvas-2"></canvas>
+            <div class="canvas-container" id="card2-canvas-container">
+              <canvas id="electric-border-canvas-2" class="electric-border-canvas"></canvas>
+            </div>
             <div class="glow-layer-1"></div>
             <div class="glow-layer-2"></div>
-            <div class="overlay-1"></div>
-            <div class="overlay-2"></div>
-            <div class="background-glow"></div>
-            <div class="content-container">
-              <h3 class="spec-section-title">Storage Layer</h3>
-              <div class="spec-item">480TB NVMe Capacity
-                <div class="spec-sub">24x 20TB Samsung PM9A3</div>
-                <div class="spec-sub">PCIe Gen4 x4 per drive</div>
-              </div>
-              <div class="spec-item">36 GB/s Read Throughput
-                <div class="spec-sub">16 GB/s sustained write</div>
-              </div>
-              <div class="spec-item">20M IOPS Random Access
-                <div class="spec-sub">Dual AMD Rome controllers</div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Storage Layer</h2>
+              <div class="spec-list">
+                <p class="spec-item"><span class="value">480 TB</span> raw NVMe + <span class="value">80 TB</span> fast local SSDs (Expandable <span class="highlight">2 PB</span> total)</p>
+                <p class="spec-item">Sustained seq. read/write: <span class="value">30–36 GB/s</span> aggregate</p>
+                <p class="spec-item">Random read IOPS: <span class="value">3.3–3.7 million</span> (4K)</p>
+                <p class="spec-item">Total I/O across dual-plane fabric: <span class="value">520–580 Gbit/s</span></p>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Card 3: Performance -->
         <div class="card-container">
           <div class="inner-container">
-            <canvas class="electric-border-canvas" id="electric-border-canvas-3"></canvas>
+            <div class="canvas-container" id="card3-canvas-container">
+              <canvas id="electric-border-canvas-3" class="electric-border-canvas"></canvas>
+            </div>
             <div class="glow-layer-1"></div>
             <div class="glow-layer-2"></div>
-            <div class="overlay-1"></div>
-            <div class="overlay-2"></div>
-            <div class="background-glow"></div>
-            <div class="content-container">
-              <h3 class="spec-section-title">Performance</h3>
-              <div class="spec-item">117 TFLOPS FP64 Compute
-                <div class="spec-sub">256-bit AVX-512 vectors</div>
-                <div class="spec-sub">Dual 6 GHz infinity fabric</div>
-              </div>
-              <div class="spec-item">Inference Speed
-                <div class="spec-sub">750–980 tokens/sec (Qwen2.5 72B)</div>
-                <div class="spec-sub">150–220 tokens/sec (Llama 3.3 70B)</div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Performance</h2>
+              <p class="spec-sub">real measured, 1.1–1.4 T MoE, 128k context</p>
+              <div class="spec-list">
+                <p class="spec-item">FP32 aggregate: <span class="value">117 TFLOPS</span></p>
+                <p class="spec-item">INT8 sustained: <span class="value">935 TOPS</span></p>
+                <p class="spec-item">Tokens/sec (generation): <span class="value">750–980 t/s</span></p>
+                <p class="spec-item spec-sub">→ with dual-plane + speculative decoding: <span class="value">900–1,100 t/s</span></p>
+                <p class="spec-item">Time-to-first-token: <span class="value">28–65 ms</span></p>
+                <p class="spec-item">Model cold load (1.4 T): <span class="value">7–13 s</span> from NVMe</p>
+                <p class="spec-item">Fine-tuning 1 T model on 200 GB data: <span class="value">2.9–6 hours</span></p>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Card 4: Physical & Power -->
         <div class="card-container">
           <div class="inner-container">
-            <canvas class="electric-border-canvas" id="electric-border-canvas-4"></canvas>
+            <div class="canvas-container" id="card4-canvas-container">
+              <canvas id="electric-border-canvas-4" class="electric-border-canvas"></canvas>
+            </div>
             <div class="glow-layer-1"></div>
             <div class="glow-layer-2"></div>
-            <div class="overlay-1"></div>
-            <div class="overlay-2"></div>
-            <div class="background-glow"></div>
-            <div class="content-container">
-              <h3 class="spec-section-title">Physical & Power</h3>
-              <div class="spec-item">≤950W System Power
-                <div class="spec-sub">Dual 2000W 80+ Titanium PSUs</div>
-                <div class="spec-sub">2N+1 redundant power topology</div>
-              </div>
-              <div class="spec-item">Acoustic Output
-                <div class="spec-sub">41-44 dBA @ 22°C ambient</div>
-              </div>
-              <div class="spec-item">Form Factor: 5U Rackmount
-                <div class="spec-sub">Fits standard 19" racks</div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Physical & Power</h2>
+              <div class="spec-list">
+                <p class="spec-item">Power draw (full AI load): <span class="value">≤ 950 W</span></p>
+                <p class="spec-item">Noise (5 nodes full load): <span class="value">41–44 dBA</span> at 1 m</p>
+                <p class="spec-item">Rack option: <span class="value">12–14U</span> standard 19-inch</p>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Card 5: Software & Security -->
         <div class="card-container">
           <div class="inner-container">
-            <canvas class="electric-border-canvas" id="electric-border-canvas-5"></canvas>
+            <div class="canvas-container" id="card5-canvas-container">
+              <canvas id="electric-border-canvas-5" class="electric-border-canvas"></canvas>
+            </div>
             <div class="glow-layer-1"></div>
             <div class="glow-layer-2"></div>
-            <div class="overlay-1"></div>
-            <div class="overlay-2"></div>
-            <div class="background-glow"></div>
-            <div class="content-container">
-              <h3 class="spec-section-title">Software & Security</h3>
-              <div class="spec-item">ForgeOS Bare-Metal Runtime
-                <div class="spec-sub">Verified boot chain</div>
-                <div class="spec-sub">Zero-trust network stack</div>
-              </div>
-              <div class="spec-item">Hardware Security
-                <div class="spec-sub">AMD SEV-SNP encryption</div>
-                <div class="spec-sub">FIPS 140-3 Level 2 cryptography</div>
-              </div>
-              <div class="spec-item">Compliance Ready
-                <div class="spec-sub">HIPAA / ITAR / SOC 2 Type II</div>
+          </div>
+          <div class="overlay-1"></div>
+          <div class="overlay-2"></div>
+          <div class="background-glow"></div>
+          <div class="content-container">
+            <div class="content-inner">
+              <h2 class="spec-section-title">Software & Security</h2>
+              <div class="spec-list">
+                <p class="spec-item">Proprietary <span class="highlight">ForgeOS</span> (in development) – <span class="value">97–99 %</span> scaling efficiency across dual-plane ring</p>
+                <p class="spec-item"><span class="value">1.8–2.3 bit</span> quantization + LoRA serving stack</p>
+                <p class="spec-item">Hardware-isolated execution enclaves per node – secure boot, runtime vault, root-proof model/data protection</p>
+                <p class="spec-item"><span class="highlight">Full air-gap</span> – zero telemetry, zero external connectivity</p>
+                <p class="spec-item">Automatic failover across dual-plane, immutable zero-trust audit logs, <span class="highlight">FIPS 140-3</span> encrypted storage</p>
+                <p class="spec-item">Compliance-ready: <span class="value">HIPAA</span>, <span class="value">ITAR</span>, <span class="value">EU AI Act High-Risk</span>, <span class="value">CMMC Level 3</span></p>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
-
+  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <img src="Studio5 SVG.svg" alt="Studio Five" class="footer-logo">
@@ -695,7 +772,6 @@
         nav.classList.remove('scrolled');
       }
     });
-
     // Starfield parallax
     gsap.to('.stars', {
       y: -400,
@@ -726,7 +802,6 @@
         scrub: 2
       }
     });
-
     // Specs section parallax
     gsap.to('.section-specs', {
       y: -100,
@@ -864,148 +939,6 @@
         }
         accumulated += straightWidth;
 
-        if (distance <= accumulated + cornerArc) {
-          const progress = (distance - accumulated) / cornerArc;
-          return this.getCornerPoint(left + radius, top + height - radius, radius, Math.PI / 2, Math.PI / 2, progress);
-        }
-        accumulated += cornerArc;
-
-        if (distance <= accumulated + straightHeight) {
-          const progress = (distance - accumulated) / straightHeight;
-          return { x: left, y: top + height - radius - progress * straightHeight };
-        }
-        accumulated += straightHeight;
-
-        const progress = (distance - accumulated) / cornerArc;
-        return this.getCornerPoint(left + radius, top + radius, radius, Math.PI, Math.PI / 2, progress);
-      }
-
-      getCornerPoint(centerX, centerY, radius, startAngle, arcLength, progress) {
-        const angle = startAngle + progress * arcLength;
-        return { x: centerX + radius * Math.cos(angle), y: centerY + radius * Math.sin(angle) };
-      }
-
-      drawElectricBorder(currentTime = 0) {
-        if (!this.canvas || !this.ctx) return;
-        const deltaTime = (currentTime - this.lastFrameTime) / 1000;
-        this.time += deltaTime * this.speed;
-        this.lastFrameTime = currentTime;
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.strokeStyle = this.color;
-        this.ctx.lineWidth = this.lineWidth;
-        this.ctx.lineCap = "round";
-        this.ctx.lineJoin = "round";
-        const scale = this.displacement;
-        const left = this.borderOffset;
-        const top = this.borderOffset;
-        const borderWidth = this.canvas.width - 2 * this.borderOffset;
-        const borderHeight = this.canvas.height - 2 * this.borderOffset;
-        const maxRadius = Math.min(borderWidth, borderHeight) / 2;
-        const radius = Math.min(this.borderRadius, maxRadius);
-        const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
-        const sampleCount = Math.floor(approximatePerimeter / 2);
-        this.ctx.beginPath();
-        for (let i = 0; i <= sampleCount; i++) {
-          const progress = i / sampleCount;
-          const point = this.getRoundedRectPoint(progress, left, top, borderWidth, borderHeight, radius);
-          const xNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 0, this.baseFlatness);
-          const yNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 1, this.baseFlatness);
-          const displacedX = point.x + xNoise * scale;
-          const displacedY = point.y + yNoise * scale;
-          if (i === 0) {
-            this.ctx.moveTo(displacedX, displacedY);
-          } else {
-            this.ctx.lineTo(displacedX, displacedY);
-          }
-        }
-        this.ctx.closePath();
-        this.ctx.stroke();
-        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
-      }
-
-      start() {
-        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
-      }
-
-      stop() {
-        if (this.animationId) {
-          cancelAnimationFrame(this.animationId);
-          this.animationId = null;
-        }
-        this.ctx.clearRect(0, 0, this.width, this.height);
-      }
-
-      resize(width, height) {
-        this.width = width;
-        this.height = height;
-        this.canvas.width = width;
-        this.canvas.height = height;
-      }
-    }
-
-    // Initialize electric border cards
-    function initializeCards() {
-      const cards = document.querySelectorAll('.card-container');
-      cards.forEach((card, index) => {
-        const canvas = card.querySelector('.electric-border-canvas');
-        if (!canvas) return;
-
-        const cardRect = card.getBoundingClientRect();
-        const contentHeight = cardRect.height;
-        const contentWidth = cardRect.width;
-        const canvasWidth = contentWidth + 120;
-        const canvasHeight = contentHeight + 120;
-
-        canvas.style.width = canvasWidth + 'px';
-        canvas.style.height = canvasHeight + 'px';
-
-        const border = new ElectricBorder(`electric-border-canvas-${index + 1}`, {
-          width: canvasWidth,
-          height: canvasHeight,
-          octaves: 10,
-          lacunarity: 1.6,
-          gain: 0.7,
-          amplitude: 0.075,
-          frequency: 10,
-          baseFlatness: 0,
-          displacement: 60,
-          speed: 1.5,
-          borderOffset: 60,
-          borderRadius: 24,
-          lineWidth: 1,
-          color: "#3b82f6"
-        });
-
-        electricBorders.push(border);
-
-        // Add hover event listeners
-        card.addEventListener('mouseenter', () => {
-          border.start();
-        });
-
-        card.addEventListener('mouseleave', () => {
-          border.stop();
-        });
-      });
-    }
-
-    // Initialize on DOM load
-    if (document.readyState === 'loading') {
-      document.addEventListener("DOMContentLoaded", initializeCards);
-    } else {
-      initializeCards();
-    }
-
-    // Re-initialize on resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        electricBorders.forEach(border => border.stop());
-        electricBorders = [];
-        initializeCards();
-      }, 250);
-    });
   </script>
 </body>
 </html>
