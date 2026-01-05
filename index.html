@@ -449,9 +449,10 @@
 
     .problem-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       margin-top: 4rem;
+      align-items: stretch;
     }
 
     .problem-card {
@@ -462,6 +463,9 @@
       transition: all 0.4s ease;
       opacity: 0;
       transform: translateY(40px);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .problem-card:hover {
@@ -717,25 +721,29 @@
 
     /* Responsive */
     @media (max-width: 968px) {
+      .problem-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .stats-row {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .features-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
       }
-      
+
       .comparison-row {
         grid-template-columns: 1fr;
         gap: 0.5rem;
         text-align: center;
       }
-      
+
       .comparison-left {
         text-align: center;
       }
-      
+
       footer {
         padding: 1rem 1.5rem;
       }
@@ -751,6 +759,10 @@
     }
 
     @media (max-width: 768px) {
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+
       nav {
         padding: 1rem 1.5rem;
       }
