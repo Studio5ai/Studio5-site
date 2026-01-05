@@ -449,10 +449,10 @@
 
     .problem-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
       margin-top: 4rem;
-      align-items: stretch;
+      align-items: start;
     }
 
     .problem-card {
@@ -722,7 +722,7 @@
     /* Responsive */
     @media (max-width: 968px) {
       .problem-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
 
       .stats-row {
@@ -760,7 +760,7 @@
 
     @media (max-width: 768px) {
       .problem-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       nav {
@@ -790,6 +790,12 @@
 
       .section-cta {
         padding: 6rem 1.5rem 1.5rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .problem-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
