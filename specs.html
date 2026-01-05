@@ -939,6 +939,148 @@
         }
         accumulated += straightWidth;
 
+        if (distance <= accumulated + cornerArc) {
+          const progress = (distance - accumulated) / cornerArc;
+          return this.getCornerPoint(left + radius, top + height - radius, radius, Math.PI / 2, Math.PI / 2, progress);
+        }
+        accumulated += cornerArc;
+
+        if (distance <= accumulated + straightHeight) {
+          const progress = (distance - accumulated) / straightHeight;
+          return { x: left, y: top + height - radius - progress * straightHeight };
+        }
+        accumulated += straightHeight;
+
+        const progress = (distance - accumulated) / cornerArc;
+        return this.getCornerPoint(left + radius, top + radius, radius, Math.PI, Math.PI / 2, progress);
+      }
+
+      getCornerPoint(centerX, centerY, radius, startAngle, arcLength, progress) {
+        const angle = startAngle + progress * arcLength;
+        return { x: centerX + radius * Math.cos(angle), y: centerY + radius * Math.sin(angle) };
+      }
+
+      drawElectricBorder(currentTime = 0) {
+        if (!this.canvas || !this.ctx) return;
+        const deltaTime = (currentTime - this.lastFrameTime) / 1000;
+        this.time += deltaTime * this.speed;
+        this.lastFrameTime = currentTime;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.strokeStyle = this.color;
+        this.ctx.lineWidth = this.lineWidth;
+        this.ctx.lineCap = "round";
+        this.ctx.lineJoin = "round";
+        const scale = this.displacement;
+        const left = this.borderOffset;
+        const top = this.borderOffset;
+        const borderWidth = this.canvas.width - 2 * this.borderOffset;
+        const borderHeight = this.canvas.height - 2 * this.borderOffset;
+        const maxRadius = Math.min(borderWidth, borderHeight) / 2;
+        const radius = Math.min(this.borderRadius, maxRadius);
+        const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
+        const sampleCount = Math.floor(approximatePerimeter / 2);
+        this.ctx.beginPath();
+        for (let i = 0; i <= sampleCount; i++) {
+          const progress = i / sampleCount;
+          const point = this.getRoundedRectPoint(progress, left, top, borderWidth, borderHeight, radius);
+          const xNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 0, this.baseFlatness);
+          const yNoise = this.octavedNoise(progress * 8, this.octaves, this.lacunarity, this.gain, this.amplitude, this.frequency, this.time, 1, this.baseFlatness);
+          const displacedX = point.x + xNoise * scale;
+          const displacedY = point.y + yNoise * scale;
+          if (i === 0) {
+            this.ctx.moveTo(displacedX, displacedY);
+          } else {
+            this.ctx.lineTo(displacedX, displacedY);
+          }
+        }
+        this.ctx.closePath();
+        this.ctx.stroke();
+        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
+      }
+
+      start() {
+        this.animationId = requestAnimationFrame((time) => this.drawElectricBorder(time));
+      }
+
+      stop() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+          this.animationId = null;
+        }
+        this.ctx.clearRect(0, 0, this.width, this.height);
+      }
+
+      resize(width, height) {
+        this.width = width;
+        this.height = height;
+        this.canvas.width = width;
+        this.canvas.height = height;
+      }
+    }
+
+    // Initialize electric border cards
+    function initializeCards() {
+      const cards = document.querySelectorAll('.card-container');
+      cards.forEach((card, index) => {
+        const canvas = card.querySelector('.electric-border-canvas');
+        if (!canvas) return;
+
+        const cardRect = card.getBoundingClientRect();
+        const contentHeight = cardRect.height;
+        const contentWidth = cardRect.width;
+        const canvasWidth = contentWidth + 120;
+        const canvasHeight = contentHeight + 120;
+
+        canvas.style.width = canvasWidth + 'px';
+        canvas.style.height = canvasHeight + 'px';
+
+        const border = new ElectricBorder(`electric-border-canvas-${index + 1}`, {
+          width: canvasWidth,
+          height: canvasHeight,
+          octaves: 10,
+          lacunarity: 1.6,
+          gain: 0.7,
+          amplitude: 0.075,
+          frequency: 10,
+          baseFlatness: 0,
+          displacement: 60,
+          speed: 1.5,
+          borderOffset: 60,
+          borderRadius: 24,
+          lineWidth: 1,
+          color: "#3b82f6"
+        });
+
+        electricBorders.push(border);
+
+        // Add hover event listeners
+        card.addEventListener('mouseenter', () => {
+          border.start();
+        });
+
+        card.addEventListener('mouseleave', () => {
+          border.stop();
+        });
+      });
+    }
+
+    // Initialize on DOM load
+    if (document.readyState === 'loading') {
+      document.addEventListener("DOMContentLoaded", initializeCards);
+    } else {
+      initializeCards();
+    }
+
+    // Re-initialize on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        electricBorders.forEach(border => border.stop());
+        electricBorders = [];
+        initializeCards();
+      }, 250);
+    });
   </script>
 </body>
 </html>
