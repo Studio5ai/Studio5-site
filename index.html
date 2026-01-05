@@ -456,22 +456,55 @@
     }
 
     .problem-card {
+      perspective: 1000px;
+      opacity: 0;
+      transform: translateY(40px);
+      height: 100%;
+      position: relative;
+    }
+
+    .problem-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
       padding: 2rem;
       background: rgba(255,255,255,0.02);
       border: 1px solid var(--color-border);
       border-radius: 8px;
-      transition: all 0.4s ease;
-      opacity: 0;
-      transform: translateY(40px);
       display: flex;
       flex-direction: column;
-      height: 100%;
     }
 
-    .problem-card:hover {
-      background: rgba(255,255,255,0.04);
-      border-color: var(--color-text-dim);
-      transform: translateY(-5px);
+    .problem-card:hover .problem-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .problem-card-front,
+    .problem-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      padding: 2rem;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .problem-card-front {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--color-border);
+    }
+
+    .problem-card-back {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(255,255,255,0.02));
+      border: 1px solid var(--color-accent);
+      transform: rotateY(180deg);
     }
 
     .problem-card h3 {
@@ -485,6 +518,10 @@
       font-size: 0.9375rem;
       color: var(--color-text-muted);
       line-height: 1.6;
+    }
+
+    .problem-card-back p {
+      color: var(--color-text);
     }
 
     /* Solution Section */
@@ -862,32 +899,88 @@
       
       <div class="problem-grid">
         <div class="problem-card">
-          <h3>Data Hostage</h3>
-          <p>Your most sensitive data sits on someone else's servers. Forever. You have zero real control over your prompts, outputs, or models.</p>
+          <div class="problem-card-inner">
+            <div class="problem-card-front">
+              <h3>Data Hostage</h3>
+              <p>Your most sensitive data sits on someone else's servers. Forever. You have zero real control over your prompts, outputs, or models.</p>
+            </div>
+            <div class="problem-card-back">
+              <h3>Data Hostage</h3>
+              <p>Studio Five keeps everything on-premises. Your data never touches the internet—complete sovereignty over your AI operations.</p>
+            </div>
+          </div>
         </div>
         <div class="problem-card">
-          <h3>Escalating Costs</h3>
-          <p>Every month the bill gets bigger and you still own nothing. Every token you generate is another recurring tax—with no end.</p>
+          <div class="problem-card-inner">
+            <div class="problem-card-front">
+              <h3>Escalating Costs</h3>
+              <p>Every month the bill gets bigger and you still own nothing. Every token you generate is another recurring tax—with no end.</p>
+            </div>
+            <div class="problem-card-back">
+              <h3>Escalating Costs</h3>
+              <p>Pay once, own forever. No subscriptions, no per-token fees. Your AI infrastructure is an asset, not an expense.</p>
+            </div>
+          </div>
         </div>
         <div class="problem-card">
-          <h3>Performance Roulette</h3>
-          <p>Your speed and uptime depend on someone else's queue and goodwill. You're paying millions for intelligence you'll never actually own.</p>
+          <div class="problem-card-inner">
+            <div class="problem-card-front">
+              <h3>Performance Roulette</h3>
+              <p>Your speed and uptime depend on someone else's queue and goodwill. You're paying millions for intelligence you'll never actually own.</p>
+            </div>
+            <div class="problem-card-back">
+              <h3>Performance Roulette</h3>
+              <p>Dedicated hardware means consistent, predictable performance. No queues, no throttling, no sharing resources.</p>
+            </div>
+          </div>
         </div>
         <div class="problem-card">
-          <h3>Compliance Risk</h3>
-          <p>One new regulation can shut your entire AI program down overnight. Public AI services are becoming legally impossible for sensitive data.</p>
+          <div class="problem-card-inner">
+            <div class="problem-card-front">
+              <h3>Compliance Risk</h3>
+              <p>One new regulation can shut your entire AI program down overnight. Public AI services are becoming legally impossible for sensitive data.</p>
+            </div>
+            <div class="problem-card-back">
+              <h3>Compliance Risk</h3>
+              <p>Air-gapped systems simplify compliance. HIPAA, ITAR, SOC 2—all easier when data never leaves your building.</p>
+            </div>
+          </div>
         </div>
         <div class="problem-card">
-          <h3>Security Exposure</h3>
-          <p>As long as your data is in the cloud, it's vulnerable. Patient records, financials, storyboards, classified work—all at risk.</p>
+          <div class="problem-card-inner">
+            <div class="problem-card-front">
+              <h3>Security Exposure</h3>
+              <p>As long as your data is in the cloud, it's vulnerable. Patient records, financials, storyboards, classified work—all at risk.</p>
+            </div>
+            <div class="problem-card-back">
+              <h3>Security Exposure</h3>
+              <p>Zero external connectivity means zero attack surface. Your AI is physically isolated—the ultimate security.</p>
+            </div>
+          </div>
         </div>
         <div class="problem-card">
-          <h3>Supply Chain Uncertainty</h3>
-          <p>When Musk buys out NVIDIA's entire GPU inventory, your cloud provider's queue gets longer. Your AI ambitions wait in line.</p>
+          <div class="problem-card-inner">
+            <div class="problem-card-front">
+              <h3>Supply Chain Uncertainty</h3>
+              <p>When Musk buys out NVIDIA's entire GPU inventory, your cloud provider's queue gets longer. Your AI ambitions wait in line.</p>
+            </div>
+            <div class="problem-card-back">
+              <h3>Supply Chain Uncertainty</h3>
+              <p>We use non-GPU architecture. When the market chokes on GPU shortages, Studio Five keeps running.</p>
+            </div>
+          </div>
         </div>
         <div class="problem-card">
-          <h3>Bureaucracy, Politics & Unexpected Laws</h3>
-          <p>Governments worldwide are racing to regulate AI—and they don't care about your deployment timeline. New rules can appear overnight, forcing expensive pivots or complete shutdowns.</p>
+          <div class="problem-card-inner">
+            <div class="problem-card-front">
+              <h3>Bureaucracy, Politics & Unexpected Laws</h3>
+              <p>Governments worldwide are racing to regulate AI—and they don't care about your deployment timeline. New rules can appear overnight, forcing expensive pivots or complete shutdowns.</p>
+            </div>
+            <div class="problem-card-back">
+              <h3>Bureaucracy, Politics & Unexpected Laws</h3>
+              <p>On-premises AI gives you control over compliance. Adapt to new regulations on your timeline, not theirs.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
