@@ -298,8 +298,6 @@
       position: relative;
       width: 100%;
       background: transparent;
-      opacity: 0;
-      transform: translateY(40px);
     }
 
     /* First 3 cards - span 2 columns each */
@@ -839,17 +837,6 @@
         end: 'bottom top',
         scrub: 3
       }
-    });
-
-    // Specs cards animation - animate in on page load
-    gsap.utils.toArray('.card-container').forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        delay: 0.2 + i * 0.1,
-        ease: 'power2.out'
-      });
     });
 
     // Electric Border Animation Class
